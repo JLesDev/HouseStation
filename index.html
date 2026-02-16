@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J-Train</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Archivo+Black&display=swap&family=Raleway&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Archivo+Black&display=swap&family=Raleway&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        ::selection {
+            color: rgb(255, 255, 255);
+            background-color: rgb(214, 79, 255);
+            backdrop-filter: invert(100%);
+        }
+
 
         :root {
             --yellow: #F5EC5D;
@@ -77,9 +87,9 @@
 
         body {
             font-family: 'Raleway', sans-serif;
-            background: #0d1117;
-            background-image: 
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+            background: #313438;
+            /* background-image:
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.01) 2px, rgba(255, 255, 255, 0.01) 4px); */
             color: white;
             overflow-x: hidden;
             min-height: 100vh;
@@ -640,7 +650,7 @@
                 gap: 10px;
             }
 
-            #station-selects-container > div {
+            #station-selects-container>div {
                 width: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
@@ -771,7 +781,7 @@
         }
 
         .theme-color-box.active::after {
-            content: '✓';
+            content: '';
             position: absolute;
             top: 50%;
             left: 50%;
@@ -911,10 +921,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 opacity: 1;
             }
+
             50% {
                 transform: scale(1.05);
                 opacity: 0.8;
@@ -1176,6 +1189,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1419,22 +1433,33 @@
                 opacity: 0;
                 transform: translateY(15px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .station-header { animation-delay: 0.1s; }
-        .main-train { animation-delay: 0.18s; }
-        .next-train-section { animation-delay: 0.26s; }
+        .station-header {
+            animation-delay: 0.1s;
+        }
+
+        .main-train {
+            animation-delay: 0.18s;
+        }
+
+        .next-train-section {
+            animation-delay: 0.26s;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>J-Train</h1>
         <div class="header-controls">
-            <a href="https://transport.vic.gov.au/disruptions/disruptions-information" target="_blank" class="disruptions-link">Disruptions</a>
+            <a href="https://transport.vic.gov.au/disruptions/disruptions-information" target="_blank"
+                class="disruptions-link">Disruptions</a>
             <button class="fullscreen-btn" id="fullscreen-btn">Fullscreen</button>
             <button class="theme-toggle" id="theme-toggle">Simple</button>
         </div>
@@ -1455,17 +1480,28 @@
         <div class="control-group">
             <label>Theme</label>
             <div class="theme-colors">
-                <div class="theme-color-box" data-theme="default" style="background: linear-gradient(135deg, #2d2d2d 50%, #ffffff 50%);" title="Default"></div>
-                <div class="theme-color-box" data-theme="cream-teal" style="background: linear-gradient(135deg, #F0EDCC 50%, #02343F 50%);" title="Cream & Teal"></div>
-                <div class="theme-color-box" data-theme="sage-purple" style="background: linear-gradient(135deg, #ACC7B4 50%, #331B3F 50%);" title="Sage & Purple"></div>
-                <div class="theme-color-box" data-theme="yellow-navy" style="background: linear-gradient(135deg, #F5D042 50%, #0A174E 50%);" title="Yellow & Navy"></div>
-                <div class="theme-color-box" data-theme="lime-forest" style="background: linear-gradient(135deg, #CED46A 50%, #07553B 50%);" title="Lime & Forest"></div>
-                <div class="theme-color-box" data-theme="slate-blue" style="background: linear-gradient(135deg, #DCE2F0 50%, #50586C 50%);" title="Slate & Blue"></div>
-                <div class="theme-color-box" data-theme="peach-brown" style="background: linear-gradient(135deg, #F9EBDE 50%, #815854 50%);" title="Peach & Brown"></div>
-                <div class="theme-color-box" data-theme="gold-navy" style="background: linear-gradient(135deg, #DDA94B 50%, #1E4174 50%);" title="Gold & Navy"></div>
-                <div class="theme-color-box" data-theme="mint-navy" style="background: linear-gradient(135deg, #ADEFD1 50%, #00203F 50%);" title="Mint & Navy"></div>
-                <div class="theme-color-box" data-theme="yellow-black" style="background: linear-gradient(135deg, #FEE715 50%, #101820 50%);" title="Yellow & Black"></div>
-                <div class="theme-color-box" data-theme="sky-coral" style="background: linear-gradient(135deg, #5CC8D7 50%, #B1624E 50%);" title="Sky & Coral"></div>
+                <div class="theme-color-box" data-theme="default"
+                    style="background: linear-gradient(135deg, #2d2d2d 50%, #ffffff 50%);" title="Default"></div>
+                <div class="theme-color-box" data-theme="cream-teal"
+                    style="background: linear-gradient(135deg, #F0EDCC 50%, #02343F 50%);" title="Cream & Teal"></div>
+                <div class="theme-color-box" data-theme="sage-purple"
+                    style="background: linear-gradient(135deg, #ACC7B4 50%, #331B3F 50%);" title="Sage & Purple"></div>
+                <div class="theme-color-box" data-theme="yellow-navy"
+                    style="background: linear-gradient(135deg, #F5D042 50%, #0A174E 50%);" title="Yellow & Navy"></div>
+                <div class="theme-color-box" data-theme="lime-forest"
+                    style="background: linear-gradient(135deg, #CED46A 50%, #07553B 50%);" title="Lime & Forest"></div>
+                <div class="theme-color-box" data-theme="slate-blue"
+                    style="background: linear-gradient(135deg, #DCE2F0 50%, #50586C 50%);" title="Slate & Blue"></div>
+                <div class="theme-color-box" data-theme="peach-brown"
+                    style="background: linear-gradient(135deg, #F9EBDE 50%, #815854 50%);" title="Peach & Brown"></div>
+                <div class="theme-color-box" data-theme="gold-navy"
+                    style="background: linear-gradient(135deg, #DDA94B 50%, #1E4174 50%);" title="Gold & Navy"></div>
+                <div class="theme-color-box" data-theme="mint-navy"
+                    style="background: linear-gradient(135deg, #ADEFD1 50%, #00203F 50%);" title="Mint & Navy"></div>
+                <div class="theme-color-box" data-theme="yellow-black"
+                    style="background: linear-gradient(135deg, #FEE715 50%, #101820 50%);" title="Yellow & Black"></div>
+                <div class="theme-color-box" data-theme="sky-coral"
+                    style="background: linear-gradient(135deg, #5CC8D7 50%, #B1624E 50%);" title="Sky & Coral"></div>
             </div>
         </div>
     </div>
@@ -1478,7 +1514,7 @@
     </div>
 
     <button class="chat-button" id="chat-button">Chat</button>
-    
+
     <div class="chat-notice" id="chat-notice">
         Set station count to 1 to use chat
     </div>
@@ -1515,7 +1551,7 @@
         ];
 
         const fullscreenBtn = document.getElementById('fullscreen-btn');
-        
+
         fullscreenBtn.addEventListener('click', () => {
             if (document.body.classList.contains('fullscreen-mode')) {
                 document.body.classList.remove('fullscreen-mode');
@@ -1553,21 +1589,21 @@
         function openChat() {
             chatContainer.classList.add('active');
             document.body.classList.add('chat-active');
-            
+
             const station = allStations.find(s => s.stop_id === currentChatStation);
             const stationName = station ? station.stop_name.replace(' Railway Station', '').replace(' Station', '') : 'Station';
             document.getElementById('chat-station-name').textContent = `${stationName} Chat`;
-            
+
             loadMessages();
         }
 
         async function loadMessages() {
             if (!currentChatStation) return;
-            
+
             try {
                 const response = await fetch(`https://ptv.jontyleslie.workers.dev/chat?station=${currentChatStation}`);
                 const data = await response.json();
-                
+
                 if (data.messages && data.messages.length > 0) {
                     renderMessages(data.messages);
                 } else {
@@ -1588,7 +1624,7 @@
                     minute: '2-digit',
                     hour12: true
                 });
-                
+
                 return `
                     <div class="chat-message">
                         <div class="chat-message-header">
@@ -1599,7 +1635,7 @@
                     </div>
                 `;
             }).join('');
-            
+
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
@@ -1611,12 +1647,12 @@
 
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('chat-name').value.trim();
             const message = document.getElementById('chat-message').value.trim();
-            
+
             if (!name || !message || !currentChatStation) return;
-            
+
             try {
                 const response = await fetch('https://ptv.jontyleslie.workers.dev/chat', {
                     method: 'POST',
@@ -1629,7 +1665,7 @@
                         message: message
                     })
                 });
-                
+
                 if (response.ok) {
                     document.getElementById('chat-message').value = '';
                     loadMessages();
@@ -1645,13 +1681,17 @@
         const themeToggle = document.getElementById('theme-toggle');
         const savedTheme = localStorage.getItem('trainTheme');
         const savedColorTheme = localStorage.getItem('colorTheme');
-        
+
         if (savedTheme === 'simple') {
             document.body.classList.add('simple-mode');
             themeToggle.textContent = 'Kindle';
         } else if (savedTheme === 'kindle') {
             document.body.classList.add('kindle-mode');
             themeToggle.textContent = 'Simple';
+        }
+        else {
+            document.body.classList.add('simple-mode');
+            themeToggle.textContent = 'Kindle';
         }
 
         if (savedColorTheme && savedColorTheme !== 'default') {
@@ -1684,7 +1724,7 @@
             box.addEventListener('click', () => {
                 document.querySelectorAll('.theme-color-box').forEach(b => b.classList.remove('active'));
                 box.classList.add('active');
-                
+
                 if (theme === 'default') {
                     document.body.removeAttribute('data-theme');
                     localStorage.setItem('colorTheme', 'default');
@@ -1730,18 +1770,18 @@
             const container = document.getElementById('stations-container');
             container.className = `container cols-${count}`;
             container.innerHTML = '';
-            
+
             for (let i = 0; i < count; i++) {
                 container.innerHTML += createStationPanel(i);
                 if (!selectedStations[i]) {
                     selectedStations[i] = 1071;
                 }
             }
-            
+
             selectedStations = selectedStations.slice(0, count);
             createStationSelectors();
             updateAllTrains();
-            
+
             if (count === 1 && selectedStations.length > 0) {
                 currentChatStation = selectedStations[0];
             } else {
@@ -1754,39 +1794,39 @@
         function createStationSelectors() {
             const selectsContainer = document.getElementById('station-selects-container');
             selectsContainer.innerHTML = '';
-            
+
             for (let i = 0; i < stationCount; i++) {
                 const selectWrapper = document.createElement('div');
                 selectWrapper.style.display = 'flex';
                 selectWrapper.style.alignItems = 'center';
                 selectWrapper.style.gap = '10px';
-                
+
                 const label = document.createElement('label');
                 label.textContent = `${i + 1}`;
                 label.style.minWidth = '15px';
-                
+
                 const select = document.createElement('select');
                 select.id = `station-select-${i}`;
                 select.className = 'station-select';
-                
-                const options = allStations.map(station => 
+
+                const options = allStations.map(station =>
                     `<option value="${station.stop_id}">${station.stop_name.replace(' Railway Station', '').replace(' Station', '')}</option>`
                 ).join('');
-                
+
                 select.innerHTML = options;
                 select.value = selectedStations[i];
-                
+
                 select.addEventListener('change', (e) => {
                     selectedStations[i] = parseInt(e.target.value);
                     const station = allStations.find(s => s.stop_id === selectedStations[i]);
                     updateStationName(i, station?.stop_name);
                     updateAllTrains();
                 });
-                
+
                 selectWrapper.appendChild(label);
                 selectWrapper.appendChild(select);
                 selectsContainer.appendChild(selectWrapper);
-                
+
                 const station = allStations.find(s => s.stop_id === selectedStations[i]);
                 updateStationName(i, station?.stop_name);
             }
@@ -1803,12 +1843,12 @@
             try {
                 const response = await fetch('https://ptv.jontyleslie.workers.dev/stations');
                 const data = await response.json();
-                
+
                 if (data.stations && Array.isArray(data.stations)) {
-                    allStations = data.stations.sort((a, b) => 
+                    allStations = data.stations.sort((a, b) =>
                         a.stop_name.localeCompare(b.stop_name)
                     );
-                    
+
                     updateStationCount(stationCount);
                 }
             } catch (error) {
@@ -1829,7 +1869,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             loadStationsList();
-            
+
             if (document.body.classList.contains('kindle-mode')) {
                 document.querySelector('.station-selector').style.display = 'none';
             }
@@ -1846,8 +1886,8 @@
 
                 const cityBoundTrains = data.departures.filter(dep => {
                     const direction = data.directions?.[dep.direction_id]?.direction_name || '';
-                    const isToCity = dep.direction_id === 1 || 
-                                    CITY_LOOP_STATIONS.some(station => direction.includes(station));
+                    const isToCity = dep.direction_id === 1 ||
+                        CITY_LOOP_STATIONS.some(station => direction.includes(station));
                     return isToCity;
                 });
 
@@ -1913,7 +1953,7 @@
             if (destinationEl.textContent !== firstTrain.destination) {
                 destinationEl.textContent = firstTrain.destination;
             }
-            
+
             const statusText = getStatusText(firstTrain.minutes);
             const statusClass = `status-badge ${getStatusClass(firstTrain.minutes)}`;
             if (statusEl.textContent !== statusText) statusEl.textContent = statusText;
@@ -1935,7 +1975,7 @@
 
         async function updateAllTrains() {
             const isKindle = document.body.classList.contains('kindle-mode');
-            
+
             const promises = selectedStations.map(stationId => fetchTrains(stationId));
             const results = await Promise.all(promises);
 
@@ -1944,8 +1984,8 @@
             });
 
             const now = new Date();
-            const timeString = now.toLocaleTimeString('en-AU', { 
-                hour: '2-digit', 
+            const timeString = now.toLocaleTimeString('en-AU', {
+                hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit'
             });
@@ -1956,21 +1996,22 @@
         }
 
         let updateInterval;
-        
+
         function startUpdates() {
             updateAllTrains();
-            
+
             if (updateInterval) {
                 clearInterval(updateInterval);
             }
-            
+
             const isKindle = document.body.classList.contains('kindle-mode');
             const interval = isKindle ? 60000 : 30000;
-            
+
             updateInterval = setInterval(updateAllTrains, interval);
         }
 
         startUpdates();
     </script>
 </body>
+
 </html>
