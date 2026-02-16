@@ -282,6 +282,11 @@
             transition: none !important;
             text-shadow: none !important;
             box-shadow: none !important;
+            transform: none !important;
+        }
+
+        body.kindle-mode .fade-in {
+            opacity: 1 !important;
         }
 
         body.kindle-mode .header {
@@ -291,16 +296,13 @@
 
         body.kindle-mode .header h1 {
             color: #ffffff;
+            transform: none;
         }
 
         body.kindle-mode .theme-toggle {
             background: transparent;
             border-color: #ffffff;
             color: #ffffff;
-        }
-
-        body.kindle-mode .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         body.kindle-mode .station-selector {
@@ -318,6 +320,7 @@
 
         body.kindle-mode .station-name {
             color: #000000;
+            transform: none;
         }
 
         body.kindle-mode .station-line {
@@ -332,6 +335,7 @@
         body.kindle-mode .main-time {
             color: #000000;
             font-weight: 900;
+            transform: none;
         }
 
         body.kindle-mode .main-label {
@@ -364,6 +368,7 @@
 
         body.kindle-mode .next-train-time {
             color: #000000;
+            transform: none;
         }
 
         body.kindle-mode .next-train-suffix {
@@ -993,12 +998,14 @@
                 themeToggle.textContent = 'Simple';
                 localStorage.setItem('trainTheme', 'festival');
                 document.querySelector('.station-selector').style.display = 'flex';
+                startUpdates();
             } else if (document.body.classList.contains('simple-mode')) {
                 document.body.classList.remove('simple-mode');
                 document.body.classList.add('kindle-mode');
                 themeToggle.textContent = 'Simple';
                 localStorage.setItem('trainTheme', 'kindle');
                 document.querySelector('.station-selector').style.display = 'none';
+                startUpdates();
             } else {
                 document.body.classList.add('simple-mode');
                 themeToggle.textContent = 'Kindle';
@@ -1220,32 +1227,45 @@
             if (!timeEl) return;
 
             if (!trains || trains.length === 0) {
-                timeEl.textContent = '--';
-                statusEl.textContent = 'No Data';
-                statusEl.className = 'status-badge status-loading';
-                destinationEl.textContent = '';
-                nextTimeEl.textContent = '--';
-                nextDestinationEl.textContent = '';
+                if (timeEl.textContent !== '--') timeEl.textContent = '--';
+                if (statusEl.textContent !== 'No Data') statusEl.textContent = 'No Data';
+                if (statusEl.className !== 'status-badge status-loading') statusEl.className = 'status-badge status-loading';
+                if (destinationEl.textContent !== '') destinationEl.textContent = '';
+                if (nextTimeEl.textContent !== '--') nextTimeEl.textContent = '--';
+                if (nextDestinationEl.textContent !== '') nextDestinationEl.textContent = '';
                 return;
             }
 
             const firstTrain = trains[0];
-            timeEl.textContent = firstTrain.minutes;
-            destinationEl.textContent = firstTrain.destination;
-            statusEl.textContent = getStatusText(firstTrain.minutes);
-            statusEl.className = `status-badge ${getStatusClass(firstTrain.minutes)}`;
+            if (timeEl.textContent !== String(firstTrain.minutes)) {
+                timeEl.textContent = firstTrain.minutes;
+            }
+            if (destinationEl.textContent !== firstTrain.destination) {
+                destinationEl.textContent = firstTrain.destination;
+            }
+            
+            const statusText = getStatusText(firstTrain.minutes);
+            const statusClass = `status-badge ${getStatusClass(firstTrain.minutes)}`;
+            if (statusEl.textContent !== statusText) statusEl.textContent = statusText;
+            if (statusEl.className !== statusClass) statusEl.className = statusClass;
 
             if (trains.length > 1) {
                 const secondTrain = trains[1];
-                nextTimeEl.textContent = secondTrain.minutes;
-                nextDestinationEl.textContent = secondTrain.destination;
+                if (nextTimeEl.textContent !== String(secondTrain.minutes)) {
+                    nextTimeEl.textContent = secondTrain.minutes;
+                }
+                if (nextDestinationEl.textContent !== secondTrain.destination) {
+                    nextDestinationEl.textContent = secondTrain.destination;
+                }
             } else {
-                nextTimeEl.textContent = '--';
-                nextDestinationEl.textContent = '';
+                if (nextTimeEl.textContent !== '--') nextTimeEl.textContent = '--';
+                if (nextDestinationEl.textContent !== '') nextDestinationEl.textContent = '';
             }
         }
 
         async function updateAllTrains() {
+            const isKindle = document.body.classList.contains('kindle-mode');
+            
             const promises = selectedStations.map(stationId => fetchTrains(stationId));
             const results = await Promise.all(promises);
 
@@ -1259,12 +1279,28 @@
                 minute: '2-digit',
                 second: '2-digit'
             });
-            document.getElementById('footer').textContent = `Last updated: ${timeString}`;
+            const footerEl = document.getElementById('footer');
+            if (footerEl) {
+                footerEl.textContent = `Last updated: ${timeString}`;
+            }
         }
 
-        updateAllTrains();
+        let updateInterval;
+        
+        function startUpdates() {
+            updateAllTrains();
+            
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+            
+            const isKindle = document.body.classList.contains('kindle-mode');
+            const interval = isKindle ? 60000 : 30000;
+            
+            updateInterval = setInterval(updateAllTrains, interval);
+        }
 
-        setInterval(updateAllTrains, 30000);
+        startUpdates();
     </script>
 </body>
 </html>
