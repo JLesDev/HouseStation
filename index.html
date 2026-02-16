@@ -117,7 +117,8 @@
         }
 
         .theme-toggle,
-        .disruptions-link {
+        .disruptions-link,
+        .fullscreen-btn {
             background: rgba(13, 17, 23, 0.15);
             border: 2px solid rgba(13, 17, 23, 0.25);
             color: var(--dark);
@@ -135,38 +136,58 @@
         }
 
         .theme-toggle:hover,
-        .disruptions-link:hover {
+        .disruptions-link:hover,
+        .fullscreen-btn:hover {
             background: rgba(13, 17, 23, 0.25);
             transform: translateY(-2px);
         }
 
-        body.simple-mode .disruptions-link {
+        body.simple-mode .disruptions-link,
+        body.simple-mode .fullscreen-btn {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.3);
             color: #ffffff;
         }
 
-        body.simple-mode .disruptions-link:hover {
+        body.simple-mode .disruptions-link:hover,
+        body.simple-mode .fullscreen-btn:hover {
             background: rgba(255, 255, 255, 0.3);
         }
 
-        body.simple-mode[data-theme] .disruptions-link {
+        body.simple-mode[data-theme] .disruptions-link,
+        body.simple-mode[data-theme] .fullscreen-btn {
             border-color: rgba(255, 255, 255, 0.3);
             color: var(--theme-bg);
         }
 
-        body.simple-mode[data-theme] .disruptions-link:hover {
+        body.simple-mode[data-theme] .disruptions-link:hover,
+        body.simple-mode[data-theme] .fullscreen-btn:hover {
             background: rgba(255, 255, 255, 0.2);
         }
 
-        body.kindle-mode .disruptions-link {
+        body.kindle-mode .disruptions-link,
+        body.kindle-mode .fullscreen-btn {
             background: transparent;
             border-color: #ffffff;
             color: #ffffff;
         }
 
-        body.kindle-mode .disruptions-link:hover {
+        body.kindle-mode .disruptions-link:hover,
+        body.kindle-mode .fullscreen-btn:hover {
             background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.fullscreen-mode .header,
+        body.fullscreen-mode .station-selector,
+        body.fullscreen-mode .footer,
+        body.fullscreen-mode .chat-button,
+        body.fullscreen-mode .chat-notice,
+        body.fullscreen-mode .chat-container {
+            display: none !important;
+        }
+
+        body.fullscreen-mode .container {
+            min-height: 100vh !important;
         }
 
         body.simple-mode {
@@ -306,8 +327,9 @@
         }
 
         body.simple-mode[data-theme] .footer {
-            background: rgba(0, 0, 0, 0.03);
+            background: rgb(207, 207, 207);
             border: 2px solid rgba(0, 0, 0, 0.08);
+            /* border: 2px solid rgba(0, 0, 0, 0.08); */
         }
 
         @media (max-width: 768px) {
@@ -565,10 +587,12 @@
                 width: 100%;
                 justify-content: center;
                 gap: 8px;
+                flex-wrap: wrap;
             }
 
             .theme-toggle,
-            .disruptions-link {
+            .disruptions-link,
+            .fullscreen-btn {
                 font-size: 0.75rem;
                 padding: 8px 14px;
             }
@@ -1411,6 +1435,7 @@
         <h1>J-Train</h1>
         <div class="header-controls">
             <a href="https://transport.vic.gov.au/disruptions/disruptions-information" target="_blank" class="disruptions-link">Disruptions</a>
+            <button class="fullscreen-btn" id="fullscreen-btn">Fullscreen</button>
             <button class="theme-toggle" id="theme-toggle">Simple</button>
         </div>
     </div>
@@ -1488,6 +1513,18 @@
             'Melbourne Central',
             'Parliament'
         ];
+
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        
+        fullscreenBtn.addEventListener('click', () => {
+            if (document.body.classList.contains('fullscreen-mode')) {
+                document.body.classList.remove('fullscreen-mode');
+                fullscreenBtn.textContent = 'Fullscreen';
+            } else {
+                document.body.classList.add('fullscreen-mode');
+                fullscreenBtn.textContent = 'Exit';
+            }
+        });
 
         const chatButton = document.getElementById('chat-button');
         const chatContainer = document.getElementById('chat-container');
@@ -1622,13 +1659,6 @@
         }
 
         themeToggle.addEventListener('click', () => {
-            // if (document.body.classList.contains('kindle-mode')) {
-            //     document.body.classList.remove('kindle-mode');
-            //     themeToggle.textContent = 'Simple';
-            //     localStorage.setItem('trainTheme', 'festival');
-            //     document.querySelector('.station-selector').style.display = 'flex';
-            //     startUpdates();
-            // } else 
             if (document.body.classList.contains('simple-mode')) {
                 document.body.classList.remove('simple-mode');
                 document.body.classList.add('kindle-mode');
