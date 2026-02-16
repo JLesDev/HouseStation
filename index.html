@@ -1622,13 +1622,14 @@
         }
 
         themeToggle.addEventListener('click', () => {
-            if (document.body.classList.contains('kindle-mode')) {
-                document.body.classList.remove('kindle-mode');
-                themeToggle.textContent = 'Simple';
-                localStorage.setItem('trainTheme', 'festival');
-                document.querySelector('.station-selector').style.display = 'flex';
-                startUpdates();
-            } else if (document.body.classList.contains('simple-mode')) {
+            // if (document.body.classList.contains('kindle-mode')) {
+            //     document.body.classList.remove('kindle-mode');
+            //     themeToggle.textContent = 'Simple';
+            //     localStorage.setItem('trainTheme', 'festival');
+            //     document.querySelector('.station-selector').style.display = 'flex';
+            //     startUpdates();
+            // } else 
+            if (document.body.classList.contains('simple-mode')) {
                 document.body.classList.remove('simple-mode');
                 document.body.classList.add('kindle-mode');
                 themeToggle.textContent = 'Simple';
