@@ -1520,42 +1520,6 @@
     </div>
 
     <script>
-        // ============================================================
-        // URL PARAMETER SUPPORT
-        // All settings can be preset via URL for TV/Fire Stick installs.
-        //
-        // PARAMETERS:
-        //   count          Number of station panels: 1, 2, 3, or 4
-        //   stations       Comma-separated station IDs (e.g. 1028,1107)
-        //   stationNames   Comma-separated station name fragments
-        //                  (e.g. "Flinders,Richmond" — partial match OK)
-        //   theme          Display mode: "simple", "kindle", or "default"
-        //   color          Color theme name (see list below)
-        //   fullscreen     "true" or "1" to start in fullscreen
-        //
-        // COLOR THEME NAMES:
-        //   default, cream-teal, sage-purple, yellow-navy, lime-forest,
-        //   slate-blue, peach-brown, gold-navy, mint-navy, yellow-black, sky-coral
-        //
-        // EXAMPLES:
-        //   Single station, fullscreen, kindle mode, mint-navy theme:
-        //   ?count=1&stations=1028&theme=kindle&fullscreen=true&color=mint-navy
-        //
-        //   Two stations by name, simple mode:
-        //   ?count=2&stationNames=Flinders+Street,Richmond&theme=simple
-        //
-        //   Four stations by ID, yellow-black theme:
-        //   ?count=4&stations=1028,1107,1071,1144&color=yellow-black
-        //
-        //   Just override stations without touching other settings:
-        //   ?stations=1028,1107
-        //
-        // NOTE: URL params take priority over localStorage saved settings.
-        //       Changing settings in the UI will still update localStorage
-        //       for next time (without URL params).
-        // ============================================================
-
-        // Parse URL params early so they're available throughout init
         const _urlParams = (function() {
             const p = new URLSearchParams(window.location.search);
             return {
@@ -1709,7 +1673,6 @@
             }
         });
 
-        // ---- Theme initialisation (localStorage first, URL params override below) ----
         const themeToggle = document.getElementById('theme-toggle');
         const savedTheme = localStorage.getItem('trainTheme');
         const savedColorTheme = localStorage.getItem('colorTheme');
@@ -1729,7 +1692,6 @@
             document.body.setAttribute('data-theme', savedColorTheme);
         }
 
-        // ---- Apply URL theme params (override localStorage) ----
         if (_urlParams.theme) {
             const t = _urlParams.theme.toLowerCase();
             document.body.classList.remove('simple-mode', 'kindle-mode');
@@ -1740,7 +1702,6 @@
                 document.body.classList.add('kindle-mode');
                 themeToggle.textContent = 'Simple';
             }
-            // 'default' = no extra class (dark mode)
         }
 
         if (_urlParams.color) {
@@ -1757,7 +1718,6 @@
             fullscreenBtn.textContent = 'Exit';
         }
 
-        // ---- Override station IDs from URL before list loads ----
         if (_urlParams.count) {
             const urlCount = Math.min(4, Math.max(1, parseInt(_urlParams.count)));
             if (!isNaN(urlCount)) {
@@ -1771,14 +1731,12 @@
                 .map(s => parseInt(s.trim()))
                 .filter(n => !isNaN(n));
             if (ids.length > 0) {
-                // Pad or trim to match stationCount
                 selectedStations = Array.from({ length: stationCount }, (_, i) =>
                     ids[i] !== undefined ? ids[i] : ids[ids.length - 1]
                 );
             }
         }
 
-        // ---- Theme toggle button handler ----
         themeToggle.addEventListener('click', () => {
             if (document.body.classList.contains('simple-mode')) {
                 document.body.classList.remove('simple-mode');
@@ -1795,10 +1753,8 @@
             }
         });
 
-        // ---- Color theme boxes ----
         document.querySelectorAll('.theme-color-box').forEach(box => {
             const theme = box.dataset.theme;
-            // Determine active state: URL param takes priority, then localStorage
             const activeTheme = _urlParams.color || savedColorTheme || 'default';
             if (theme === activeTheme || (!activeTheme && theme === 'default')) {
                 box.classList.add('active');
@@ -1932,7 +1888,6 @@
                         a.stop_name.localeCompare(b.stop_name)
                     );
 
-                    // ---- Resolve stationNames URL param now that list is loaded ----
                     if (_urlParams.stationNames) {
                         const names = _urlParams.stationNames.split(',').map(s => s.trim().toLowerCase());
                         const resolvedIds = names.map(name => {
