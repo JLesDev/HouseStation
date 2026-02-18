@@ -7,22 +7,11 @@
     <title>J-Train</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Archivo+Black&display=swap&family=Raleway&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Archivo+Black&display=swap&family=Raleway&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        ::selection {
-            color: rgb(255, 255, 255);
-            background-color: rgb(214, 79, 255);
-            backdrop-filter: invert(100%);
-        }
-
+        ::selection { color: rgb(255,255,255); background-color: rgb(214,79,255); backdrop-filter: invert(100%); }
 
         :root {
             --yellow: #F5EC5D;
@@ -35,55 +24,16 @@
             --light: #c9d1d9;
         }
 
-        body[data-theme="cream-teal"] {
-            --theme-bg: #F0EDCC;
-            --theme-text: #02343F;
-        }
-
-        body[data-theme="sage-purple"] {
-            --theme-bg: #ACC7B4;
-            --theme-text: #331B3F;
-        }
-
-        body[data-theme="yellow-navy"] {
-            --theme-bg: #F5D042;
-            --theme-text: #0A174E;
-        }
-
-        body[data-theme="lime-forest"] {
-            --theme-bg: #CED46A;
-            --theme-text: #07553B;
-        }
-
-        body[data-theme="slate-blue"] {
-            --theme-bg: #DCE2F0;
-            --theme-text: #50586C;
-        }
-
-        body[data-theme="peach-brown"] {
-            --theme-bg: #F9EBDE;
-            --theme-text: #815854;
-        }
-
-        body[data-theme="gold-navy"] {
-            --theme-bg: #DDA94B;
-            --theme-text: #1E4174;
-        }
-
-        body[data-theme="mint-navy"] {
-            --theme-bg: #ADEFD1;
-            --theme-text: #00203F;
-        }
-
-        body[data-theme="yellow-black"] {
-            --theme-bg: #FEE715;
-            --theme-text: #101820;
-        }
-
-        body[data-theme="sky-coral"] {
-            --theme-bg: #5CC8D7;
-            --theme-text: #B1624E;
-        }
+        body[data-theme="cream-teal"]   { --theme-bg: #F0EDCC; --theme-text: #02343F; }
+        body[data-theme="sage-purple"]  { --theme-bg: #ACC7B4; --theme-text: #331B3F; }
+        body[data-theme="yellow-navy"]  { --theme-bg: #F5D042; --theme-text: #0A174E; }
+        body[data-theme="lime-forest"]  { --theme-bg: #CED46A; --theme-text: #07553B; }
+        body[data-theme="slate-blue"]   { --theme-bg: #DCE2F0; --theme-text: #50586C; }
+        body[data-theme="peach-brown"]  { --theme-bg: #F9EBDE; --theme-text: #815854; }
+        body[data-theme="gold-navy"]    { --theme-bg: #DDA94B; --theme-text: #1E4174; }
+        body[data-theme="mint-navy"]    { --theme-bg: #ADEFD1; --theme-text: #00203F; }
+        body[data-theme="yellow-black"] { --theme-bg: #FEE715; --theme-text: #101820; }
+        body[data-theme="sky-coral"]    { --theme-bg: #5CC8D7; --theme-text: #B1624E; }
 
         body {
             font-family: 'Raleway', sans-serif;
@@ -97,7 +47,7 @@
             background: linear-gradient(165deg, var(--yellow) 0%, #FFD93D 100%);
             padding: 24px 30px 20px;
             text-align: center;
-            box-shadow: 0 2px 24px rgba(245, 236, 93, 0.3);
+            box-shadow: 0 2px 24px rgba(245,236,93,0.3);
             position: relative;
             border-bottom: 4px solid var(--dark);
             display: flex;
@@ -124,11 +74,9 @@
             right: 30px;
         }
 
-        .theme-toggle,
-        .disruptions-link,
-        .fullscreen-btn {
-            background: rgba(13, 17, 23, 0.15);
-            border: 2px solid rgba(13, 17, 23, 0.25);
+        .theme-toggle, .disruptions-link, .fullscreen-btn, .more-btn {
+            background: rgba(13,17,23,0.15);
+            border: 2px solid rgba(13,17,23,0.25);
             color: var(--dark);
             padding: 10px 18px;
             border-radius: 8px;
@@ -143,46 +91,340 @@
             display: inline-block;
         }
 
-        .theme-toggle:hover,
-        .disruptions-link:hover,
-        .fullscreen-btn:hover {
-            background: rgba(13, 17, 23, 0.25);
+        .theme-toggle:hover, .disruptions-link:hover, .fullscreen-btn:hover, .more-btn:hover {
+            background: rgba(13,17,23,0.25);
             transform: translateY(-2px);
         }
 
-        body.simple-mode .disruptions-link,
-        body.simple-mode .fullscreen-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
+        .more-wrapper { position: relative; }
+
+        .more-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            width: 270px;
+            background: var(--dark);
+            border: 2px solid rgba(245,236,93,0.35);
+            border-radius: 12px;
+            padding: 8px 0 0;
+            z-index: 2000;
+            display: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .more-dropdown.open { display: block; }
+
+        .more-dropdown-item {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: left;
+            padding: 13px 20px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .more-dropdown-item:last-of-type { border-bottom: none; }
+
+        .more-dropdown-item:hover { background: rgba(245,236,93,0.1); color: var(--yellow); }
+
+        .more-dropdown-footer {
+            padding: 12px 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.3);
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(4px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--dark);
+            border: 2px solid rgba(245,236,93,0.3);
+            border-radius: 16px;
+            max-width: 580px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 36px;
+            position: relative;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover { color: white; }
+
+        .modal h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 22px 0 8px;
+        }
+
+        .modal p {
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+
+        .modal code {
+            display: block;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: monospace;
+            font-size: 0.82rem;
+            color: var(--yellow);
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .modal table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin: 12px 0;
+        }
+
+        .modal table th {
+            text-align: left;
+            color: rgba(255,255,255,0.45);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.75rem;
+            padding: 6px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .modal table td {
+            padding: 9px 10px;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+
+        .modal table td:first-child {
+            color: var(--yellow);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .modal-cta {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--yellow);
+            color: var(--dark);
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .modal-cta:hover { background: #FFD93D; transform: translateY(-2px); }
+
+        .modal-cta.secondary {
+            background: transparent;
+            color: var(--yellow);
+            border: 2px solid var(--yellow);
+            margin-left: 10px;
+        }
+
+        .modal-cta.secondary:hover { background: rgba(245,236,93,0.1); }
+
+        .firestick-step { display: flex; gap: 14px; align-items: flex-start; margin: 12px 0; }
+
+        .firestick-step-num {
+            background: var(--yellow);
+            color: var(--dark);
+            font-weight: 900;
+            font-family: 'Archivo Black', sans-serif;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .coffee-emoji { font-size: 4rem; text-align: center; display: block; margin: 10px 0 16px; }
+
+        .share-url-box {
+            display: flex;
+            gap: 10px;
+            margin: 16px 0;
+            align-items: stretch;
+        }
+
+        .share-url-box input {
+            flex: 1;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--yellow);
+            word-break: break-all;
+            min-width: 0;
+        }
+
+        .share-url-box button {
+            background: var(--yellow);
+            border: none;
+            color: var(--dark);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .share-url-box button:hover { background: #FFD93D; }
+
+        .copy-confirm {
+            font-size: 0.82rem;
+            color: #4caf50;
+            text-align: center;
+            margin-top: 4px;
+            height: 18px;
+            transition: opacity 0.3s;
+        }
+
+        .station-id-search {
+            width: 100%;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.9rem;
+            color: white;
+            margin-bottom: 14px;
+        }
+
+        .station-id-search::placeholder { color: rgba(255,255,255,0.35); }
+        .station-id-search:focus { outline: none; border-color: var(--yellow); }
+
+        .station-id-table-wrap { max-height: 55vh; overflow-y: auto; }
+
+        .station-id-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+
+        .station-id-table th {
+            text-align: left;
+            color: rgba(255,255,255,0.45);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.75rem;
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            position: sticky;
+            top: 0;
+            background: var(--dark);
+        }
+
+        .station-id-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.8);
+        }
+
+        .station-id-table td:first-child {
+            color: var(--yellow);
+            font-family: monospace;
+            font-size: 0.9rem;
+            width: 80px;
+        }
+
+        .station-id-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+        body.simple-mode .more-btn, body.kindle-mode .more-btn {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
             color: #ffffff;
         }
 
-        body.simple-mode .disruptions-link:hover,
-        body.simple-mode .fullscreen-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+        body.simple-mode .more-btn:hover, body.kindle-mode .more-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
         }
 
+        body.simple-mode .disruptions-link, body.simple-mode .fullscreen-btn {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+            color: #ffffff;
+        }
+
+        body.simple-mode .disruptions-link:hover, body.simple-mode .fullscreen-btn:hover { background: rgba(255,255,255,0.3); }
+
         body.simple-mode[data-theme] .disruptions-link,
-        body.simple-mode[data-theme] .fullscreen-btn {
-            border-color: rgba(255, 255, 255, 0.3);
+        body.simple-mode[data-theme] .fullscreen-btn,
+        body.simple-mode[data-theme] .more-btn {
+            border-color: rgba(255,255,255,0.3);
             color: var(--theme-bg);
         }
 
-        body.simple-mode[data-theme] .disruptions-link:hover,
-        body.simple-mode[data-theme] .fullscreen-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        body.kindle-mode .disruptions-link,
-        body.kindle-mode .fullscreen-btn {
+        body.kindle-mode .disruptions-link, body.kindle-mode .fullscreen-btn {
             background: transparent;
             border-color: #ffffff;
             color: #ffffff;
-        }
-
-        body.kindle-mode .disruptions-link:hover,
-        body.kindle-mode .fullscreen-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
         }
 
         body.fullscreen-mode .header,
@@ -190,496 +432,124 @@
         body.fullscreen-mode .footer,
         body.fullscreen-mode .chat-button,
         body.fullscreen-mode .chat-notice,
-        body.fullscreen-mode .chat-container {
-            display: none !important;
-        }
+        body.fullscreen-mode .chat-container { display: none !important; }
 
-        body.fullscreen-mode .container {
-            min-height: 100vh !important;
-        }
+        body.fullscreen-mode .container { min-height: 100vh !important; }
 
-        body.simple-mode {
-            background: #ffffff;
-            background-image: none;
-        }
+        body.simple-mode { background: #ffffff; background-image: none; }
 
         body.simple-mode .header {
             background: #2d2d2d;
             border-bottom: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        body.simple-mode .header h1 {
-            color: #ffffff;
-        }
+        body.simple-mode .header h1 { color: #ffffff; }
 
         body.simple-mode .theme-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
             color: #ffffff;
         }
 
-        body.simple-mode .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
+        body.simple-mode .theme-toggle:hover { background: rgba(255,255,255,0.3); }
+        body.simple-mode .station-selector { background: #f5f5f5; border-bottom: 1px solid #e0e0e0; }
+        body.simple-mode .selector-group label { color: #666666; }
+        body.simple-mode .selector-group select { background: #ffffff; border: 2px solid #e0e0e0; color: #2d2d2d; }
+        body.simple-mode .control-group label { color: #666666; }
+        body.simple-mode .control-group select, body.simple-mode .control-group input { background: #ffffff; border: 2px solid #e0e0e0; color: #2d2d2d; }
+        body.simple-mode .theme-color-box { border-color: #e0e0e0; }
+        body.simple-mode .theme-color-box:hover { border-color: var(--theme-text); }
+        body.simple-mode .theme-color-box.active { border-color: var(--theme-text); box-shadow: 0 0 0 3px rgba(0,0,0,0.1); }
+        body.simple-mode[data-theme] .header { background: var(--theme-text); }
+        body.simple-mode[data-theme] .header h1 { color: var(--theme-bg); }
+        body.simple-mode[data-theme] .theme-toggle { border-color: rgba(255,255,255,0.3); color: var(--theme-bg); }
+        body.simple-mode[data-theme] .theme-toggle:hover { background: rgba(255,255,255,0.2); }
+        body.simple-mode[data-theme] { background: var(--theme-bg); }
+        body.simple-mode[data-theme] .station-selector { background: rgba(0,0,0,0.02); border-bottom: 1px solid rgba(0,0,0,0.08); }
+        body.simple-mode[data-theme] .station-name, body.simple-mode[data-theme] .main-time, body.simple-mode[data-theme] .next-train-time { color: var(--theme-text); }
+        body.simple-mode[data-theme] .station-line { background: var(--theme-text) !important; }
+        body.simple-mode[data-theme] .status-badge, body.simple-mode[data-theme] .status-now, body.simple-mode[data-theme] .status-soon, body.simple-mode[data-theme] .status-upcoming { background: var(--theme-text); border-color: var(--theme-text); color: var(--theme-bg); }
+        body.simple-mode[data-theme] .next-train-info { background: rgba(0,0,0,0.03); border: 2px solid rgba(0,0,0,0.08); }
+        body.simple-mode[data-theme] .footer { background: rgb(207,207,207); border: 2px solid rgba(0,0,0,0.08); }
 
-        body.simple-mode .station-selector {
-            background: #f5f5f5;
-            border-bottom: 1px solid #e0e0e0;
-        }
+        @media (max-width: 768px) { body.simple-mode[data-theme] .footer { left: 18px; transform: none; } }
 
-        body.simple-mode .selector-group label {
-            color: #666666;
-        }
+        body.kindle-mode { background: #ffffff; background-image: none; }
+        body.kindle-mode * { animation: none !important; transition: none !important; text-shadow: none !important; box-shadow: none !important; transform: none !important; }
+        body.kindle-mode .fade-in { opacity: 1 !important; }
+        body.kindle-mode .header { background: #000000; border-bottom: 3px solid #000000; }
+        body.kindle-mode .header h1 { color: #ffffff; transform: none; }
+        body.kindle-mode .theme-toggle { background: transparent; border-color: #ffffff; color: #ffffff; }
+        body.kindle-mode .station-selector { display: none; }
+        body.kindle-mode .container { min-height: calc(100vh - 100px); }
+        body.kindle-mode .station-panel { border-right: 2px solid #000000; border-bottom: 2px solid #000000; }
+        body.kindle-mode .station-name { color: #000000; transform: none; }
+        body.kindle-mode .station-line { background: #000000 !important; height: 3px; }
+        body.kindle-mode .direction-label { color: #666666; }
+        body.kindle-mode .main-time { color: #000000; font-weight: 900; transform: none; }
+        body.kindle-mode .main-label { color: #000000; }
+        body.kindle-mode .status-badge { background: #000000; border: 2px solid #000000; color: #ffffff; }
+        body.kindle-mode .status-loading { background: #666666; border-color: #666666; }
+        body.kindle-mode .next-train-section { border-top: 2px solid #000000; }
+        body.kindle-mode .next-train-label { color: #666666; }
+        body.kindle-mode .next-train-info { background: #f5f5f5; border: 2px solid #000000; }
+        body.kindle-mode .next-train-time { color: #000000; transform: none; }
+        body.kindle-mode .next-train-suffix { color: #666666; }
+        body.kindle-mode .destination { color: #666666; }
+        body.kindle-mode .footer { background: #ffffff; border: 2px solid #000000; color: #000000; backdrop-filter: none; }
 
-        body.simple-mode .selector-group select {
-            background: #ffffff;
-            border: 2px solid #e0e0e0;
-            color: #2d2d2d;
-        }
+        .container { display: grid; gap: 0; min-height: calc(100vh - 180px); }
+        .container.cols-1 { grid-template-columns: 1fr; }
+        .container.cols-2 { grid-template-columns: 1fr 1fr; }
+        .container.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .container.cols-4 { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); }
 
-        body.simple-mode .selector-group select:hover {
-            background: #ffffff;
-            border-color: #2d2d2d;
-        }
-
-        body.simple-mode .selector-group select:focus {
-            border-color: #2d2d2d;
-            box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.1);
-        }
-
-        body.simple-mode .control-group label {
-            color: #666666;
-        }
-
-        body.simple-mode .control-group select,
-        body.simple-mode .control-group input {
-            background: #ffffff;
-            border: 2px solid #e0e0e0;
-            color: #2d2d2d;
-        }
-
-        body.simple-mode .control-group select:hover,
-        body.simple-mode .control-group input:hover {
-            background: #ffffff;
-            border-color: var(--theme-text);
-        }
-
-        body.simple-mode .control-group select:focus,
-        body.simple-mode .control-group input:focus {
-            border-color: var(--theme-text);
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
-        }
-
-        body.simple-mode .theme-color-box {
-            border-color: #e0e0e0;
-        }
-
-        body.simple-mode .theme-color-box:hover {
-            border-color: var(--theme-text);
-        }
-
-        body.simple-mode .theme-color-box.active {
-            border-color: var(--theme-text);
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-        }
-
-        body.simple-mode[data-theme] .header {
-            background: var(--theme-text);
-        }
-
-        body.simple-mode[data-theme] .header h1 {
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .theme-toggle {
-            border-color: rgba(255, 255, 255, 0.3);
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        body.simple-mode[data-theme] {
-            background: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .station-selector {
-            background: rgba(0, 0, 0, 0.02);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        }
-
-        body.simple-mode[data-theme] .station-name,
-        body.simple-mode[data-theme] .main-time,
-        body.simple-mode[data-theme] .next-train-time {
-            color: var(--theme-text);
-        }
-
-        body.simple-mode[data-theme] .station-line {
-            background: var(--theme-text) !important;
-        }
-
-        body.simple-mode[data-theme] .status-badge,
-        body.simple-mode[data-theme] .status-now,
-        body.simple-mode[data-theme] .status-soon,
-        body.simple-mode[data-theme] .status-upcoming {
-            background: var(--theme-text);
-            border-color: var(--theme-text);
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .next-train-info {
-            background: rgba(0, 0, 0, 0.03);
-            border: 2px solid rgba(0, 0, 0, 0.08);
-        }
-
-        body.simple-mode[data-theme] .footer {
-            background: rgb(207, 207, 207);
-            border: 2px solid rgba(0, 0, 0, 0.08);
-        }
+        body.simple-mode .station-panel { border-right: 1px solid #e0e0e0; }
+        body.simple-mode .station-name { color: #2d2d2d; text-shadow: none; }
+        body.simple-mode .station-line { background: #2d2d2d !important; }
+        body.simple-mode .direction-label { color: #666666; }
+        body.simple-mode .main-time { color: #2d2d2d; text-shadow: none; }
+        body.simple-mode .main-label { color: #666666; }
+        body.simple-mode .status-badge { background: #2d2d2d; border-color: #2d2d2d; color: #ffffff; }
+        body.simple-mode .status-loading { background: #666666; border-color: #666666; }
+        body.simple-mode .status-now { background: #2d2d2d; border-color: #2d2d2d; animation: none; }
+        body.simple-mode .status-soon { background: #2d2d2d; border-color: #2d2d2d; }
+        body.simple-mode .status-upcoming { background: #2d2d2d; border-color: #2d2d2d; }
+        body.simple-mode .next-train-section { border-top: 1px solid #e0e0e0; }
+        body.simple-mode .next-train-label { color: #666666; }
+        body.simple-mode .next-train-info { background: #f5f5f5; border: 2px solid #e0e0e0; }
+        body.simple-mode .next-train-time { color: #2d2d2d; }
+        body.simple-mode .next-train-suffix { color: #666666; }
+        body.simple-mode .destination { color: #666666; }
+        body.simple-mode .footer { background: #f5f5f5; border: 2px solid #e0e0e0; color: #666666; backdrop-filter: none; }
 
         @media (max-width: 768px) {
-            body.simple-mode[data-theme] .footer {
-                left: 18px;
-                transform: none;
-            }
-        }
-
-        body.kindle-mode {
-            background: #ffffff;
-            background-image: none;
-        }
-
-        body.kindle-mode * {
-            animation: none !important;
-            transition: none !important;
-            text-shadow: none !important;
-            box-shadow: none !important;
-            transform: none !important;
-        }
-
-        body.kindle-mode .fade-in {
-            opacity: 1 !important;
-        }
-
-        body.kindle-mode .header {
-            background: #000000;
-            border-bottom: 3px solid #000000;
-        }
-
-        body.kindle-mode .header h1 {
-            color: #ffffff;
-            transform: none;
-        }
-
-        body.kindle-mode .theme-toggle {
-            background: transparent;
-            border-color: #ffffff;
-            color: #ffffff;
-        }
-
-        body.kindle-mode .station-selector {
-            display: none;
-        }
-
-        body.kindle-mode .container {
-            min-height: calc(100vh - 100px);
-        }
-
-        body.kindle-mode .station-panel {
-            border-right: 2px solid #000000;
-            border-bottom: 2px solid #000000;
-        }
-
-        body.kindle-mode .station-name {
-            color: #000000;
-            transform: none;
-        }
-
-        body.kindle-mode .station-line {
-            background: #000000 !important;
-            height: 3px;
-        }
-
-        body.kindle-mode .direction-label {
-            color: #666666;
-        }
-
-        body.kindle-mode .main-time {
-            color: #000000;
-            font-weight: 900;
-            transform: none;
-        }
-
-        body.kindle-mode .main-label {
-            color: #000000;
-        }
-
-        body.kindle-mode .status-badge {
-            background: #000000;
-            border: 2px solid #000000;
-            color: #ffffff;
-        }
-
-        body.kindle-mode .status-loading {
-            background: #666666;
-            border-color: #666666;
-        }
-
-        body.kindle-mode .next-train-section {
-            border-top: 2px solid #000000;
-        }
-
-        body.kindle-mode .next-train-label {
-            color: #666666;
-        }
-
-        body.kindle-mode .next-train-info {
-            background: #f5f5f5;
-            border: 2px solid #000000;
-        }
-
-        body.kindle-mode .next-train-time {
-            color: #000000;
-            transform: none;
-        }
-
-        body.kindle-mode .next-train-suffix {
-            color: #666666;
-        }
-
-        body.kindle-mode .destination {
-            color: #666666;
-        }
-
-        body.kindle-mode .footer {
-            background: #ffffff;
-            border: 2px solid #000000;
-            color: #000000;
-            backdrop-filter: none;
-        }
-
-        .container {
-            display: grid;
-            gap: 0;
-            min-height: calc(100vh - 180px);
-        }
-
-        .container.cols-1 {
-            grid-template-columns: 1fr;
-        }
-
-        .container.cols-2 {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .container.cols-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .container.cols-4 {
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-        }
-
-        body.simple-mode .station-panel {
-            border-right: 1px solid #e0e0e0;
-        }
-
-        body.simple-mode .station-name {
-            color: #2d2d2d;
-            text-shadow: none;
-        }
-
-        body.simple-mode .station-line {
-            background: #2d2d2d !important;
-        }
-
-        body.simple-mode .direction-label {
-            color: #666666;
-        }
-
-        body.simple-mode .main-time {
-            color: #2d2d2d;
-            text-shadow: none;
-        }
-
-        body.simple-mode .main-label {
-            color: #666666;
-        }
-
-        body.simple-mode .status-badge {
-            background: #2d2d2d;
-            border-color: #2d2d2d;
-            color: #ffffff;
-        }
-
-        body.simple-mode .status-loading {
-            background: #666666;
-            border-color: #666666;
-        }
-
-        body.simple-mode .status-now {
-            background: #2d2d2d;
-            border-color: #2d2d2d;
-            animation: none;
-        }
-
-        body.simple-mode .status-soon {
-            background: #2d2d2d;
-            border-color: #2d2d2d;
-        }
-
-        body.simple-mode .status-upcoming {
-            background: #2d2d2d;
-            border-color: #2d2d2d;
-        }
-
-        body.simple-mode .next-train-section {
-            border-top: 1px solid #e0e0e0;
-        }
-
-        body.simple-mode .next-train-label {
-            color: #666666;
-        }
-
-        body.simple-mode .next-train-info {
-            background: #f5f5f5;
-            border: 2px solid #e0e0e0;
-        }
-
-        body.simple-mode .next-train-time {
-            color: #2d2d2d;
-        }
-
-        body.simple-mode .next-train-suffix {
-            color: #666666;
-        }
-
-        body.simple-mode .destination {
-            color: #666666;
-        }
-
-        body.simple-mode .footer {
-            background: #f5f5f5;
-            border: 2px solid #e0e0e0;
-            color: #666666;
-            backdrop-filter: none;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 12px;
-                padding: 20px 20px 16px;
-            }
-
-            .header-controls {
-                position: static;
-                width: 100%;
-                justify-content: center;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-
-            .theme-toggle,
-            .disruptions-link,
-            .fullscreen-btn {
-                font-size: 0.75rem;
-                padding: 8px 14px;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            body.simple-mode .station-panel {
-                border-right: none;
-                border-bottom: 1px solid #e0e0e0;
-            }
-
-            .station-selector {
-                flex-direction: column;
-                gap: 10px;
-                padding: 12px 16px;
-            }
-
-            .control-group {
-                width: 100%;
-                flex-direction: column;
-                gap: 6px;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-
-            .control-group label {
-                font-size: 0.75rem;
-                min-width: auto;
-            }
-
-            .control-group select {
-                width: 100%;
-                flex: none;
-                min-width: auto;
-                font-size: 0.85rem;
-                padding: 8px 12px;
-            }
-
-            #station-selects-container {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            #station-selects-container>div {
-                width: 100% !important;
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 6px !important;
-            }
-
-            #station-selects-container label {
-                font-size: 0.75rem;
-            }
-
-            #station-selects-container select {
-                width: 100% !important;
-            }
-
-            .theme-colors {
-                justify-content: center;
-                gap: 6px;
-            }
-
-            .theme-color-box {
-                width: 28px;
-                height: 28px;
-            }
-
-            .container.cols-2,
-            .container.cols-3,
-            .container.cols-4 {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
-
-            .station-panel {
-                border-right: none !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                min-height: 40vh;
-            }
-
-            .station-panel:last-child {
-                border-bottom: none;
-            }
+            .header { flex-direction: column; gap: 12px; padding: 20px 20px 16px; }
+            .header-controls { position: static; width: 100%; justify-content: center; gap: 8px; flex-wrap: wrap; }
+            .theme-toggle, .disruptions-link, .fullscreen-btn, .more-btn { font-size: 0.75rem; padding: 8px 14px; }
+            .header h1 { font-size: 1.5rem; }
+            body.simple-mode .station-panel { border-right: none; border-bottom: 1px solid #e0e0e0; }
+            .station-selector { flex-direction: column; gap: 10px; padding: 12px 16px; }
+            .control-group { width: 100%; flex-direction: column; gap: 6px; justify-content: flex-start; align-items: flex-start; }
+            .control-group label { font-size: 0.75rem; min-width: auto; }
+            .control-group select { width: 100%; flex: none; min-width: auto; font-size: 0.85rem; padding: 8px 12px; }
+            #station-selects-container { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+            #station-selects-container > div { width: 100% !important; display: flex !important; flex-direction: column !important; gap: 6px !important; }
+            #station-selects-container label { font-size: 0.75rem; }
+            #station-selects-container select { width: 100% !important; }
+            .theme-colors { justify-content: center; gap: 6px; }
+            .theme-color-box { width: 28px; height: 28px; }
+            .container.cols-2, .container.cols-3, .container.cols-4 { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .station-panel { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.06); min-height: 40vh; }
+            .station-panel:last-child { border-bottom: none; }
+            .more-dropdown { right: auto; left: 0; }
         }
 
         .station-selector {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255,255,255,0.03);
             padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -687,24 +557,19 @@
             flex-wrap: wrap;
         }
 
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .control-group { display: flex; align-items: center; gap: 10px; }
 
         .control-group label {
             font-size: 0.85rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255,255,255,0.5);
         }
 
-        .control-group select,
-        .control-group input {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+        .control-group select, .control-group input {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             color: white;
             padding: 10px 16px;
             border-radius: 6px;
@@ -715,78 +580,26 @@
             transition: all 0.2s;
         }
 
-        .control-group select {
-            min-width: 180px;
-        }
+        .control-group select { min-width: 180px; }
+        .control-group select:hover, .control-group input:hover { background: rgba(255,255,255,0.12); border-color: var(--yellow); }
+        .control-group select:focus, .control-group input:focus { outline: none; border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(245,236,93,0.1); }
+        .control-group select option { background: var(--dark); color: white; }
 
-        .control-group select:hover,
-        .control-group input:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--yellow);
-        }
-
-        .control-group select:focus,
-        .control-group input:focus {
-            outline: none;
-            border-color: var(--yellow);
-            box-shadow: 0 0 0 3px rgba(245, 236, 93, 0.1);
-        }
-
-        .control-group select option {
-            background: var(--dark);
-            color: white;
-        }
-
-        .theme-selector {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .theme-selector { display: flex; align-items: center; gap: 10px; }
 
         .theme-color-box {
-            width: 32px;
-            height: 32px;
+            width: 32px; height: 32px;
             border-radius: 6px;
             cursor: pointer;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255,255,255,0.2);
             transition: all 0.2s;
             position: relative;
         }
 
-        .theme-color-box:hover {
-            transform: scale(1.1);
-            border-color: var(--yellow);
-        }
+        .theme-color-box:hover { transform: scale(1.1); border-color: var(--yellow); }
+        .theme-color-box.active { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(245,236,93,0.2); }
 
-        .theme-color-box.active {
-            border-color: var(--yellow);
-            box-shadow: 0 0 0 3px rgba(245, 236, 93, 0.2);
-        }
-
-        .theme-color-box.active::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .theme-colors {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            min-height: calc(100vh - 180px);
-        }
+        .theme-colors { display: flex; gap: 8px; flex-wrap: wrap; }
 
         .station-panel {
             padding: 50px 40px 40px;
@@ -794,19 +607,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-right: 1px solid rgba(255, 255, 255, 0.06);
+            border-right: 1px solid rgba(255,255,255,0.06);
             position: relative;
         }
 
-        .station-panel:last-child {
-            border-right: none;
-        }
-
-        .station-header {
-            text-align: center;
-            margin-bottom: 44px;
-            width: 100%;
-        }
+        .station-panel:last-child { border-right: none; }
+        .station-header { text-align: center; margin-bottom: 44px; width: 100%; }
 
         .station-name {
             font-family: 'Archivo Black', sans-serif;
@@ -819,33 +625,19 @@
             transform: scaleY(1.08);
         }
 
-        .station-line {
-            height: 5px;
-            width: 100px;
-            margin: 0 auto 14px;
-            border-radius: 2.5px;
-        }
-
-        .station-panel:nth-child(1) .station-line {
-            background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 100%);
-        }
-
-        .station-panel:nth-child(2) .station-line {
-            background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 100%);
-        }
+        .station-line { height: 5px; width: 100px; margin: 0 auto 14px; border-radius: 2.5px; }
+        .station-panel:nth-child(1) .station-line { background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 100%); }
+        .station-panel:nth-child(2) .station-line { background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 100%); }
 
         .direction-label {
             font-size: clamp(0.85rem, 1.4vw, 1rem);
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255,255,255,0.45);
             text-transform: uppercase;
             letter-spacing: 0.18em;
             font-weight: 600;
         }
 
-        .main-train {
-            text-align: center;
-            margin-bottom: 36px;
-        }
+        .main-train { text-align: center; margin-bottom: 36px; }
 
         .main-time {
             font-family: 'Archivo Black', sans-serif;
@@ -854,7 +646,7 @@
             line-height: 0.95;
             margin-bottom: 8px;
             color: var(--yellow);
-            text-shadow: 0 0 40px rgba(245, 236, 93, 0.25);
+            text-shadow: 0 0 40px rgba(245,236,93,0.25);
             transform: scaleY(1.15);
         }
 
@@ -863,7 +655,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.22em;
-            color: rgba(255, 255, 255, 0.65);
+            color: rgba(255,255,255,0.65);
         }
 
         .status-badge {
@@ -878,56 +670,25 @@
             border: 2px solid;
         }
 
-        .status-loading {
-            background: rgba(0, 188, 212, 0.12);
-            border-color: var(--blue);
-            color: var(--blue);
-        }
-
-        .status-now {
-            background: rgba(233, 30, 99, 0.12);
-            border-color: var(--pink);
-            color: var(--pink);
-            animation: pulse 1s ease-in-out infinite;
-        }
-
-        .status-soon {
-            background: rgba(245, 124, 0, 0.12);
-            border-color: var(--orange);
-            color: var(--orange);
-        }
-
-        .status-upcoming {
-            background: rgba(245, 236, 93, 0.12);
-            border-color: var(--yellow);
-            color: var(--yellow);
-        }
+        .status-loading { background: rgba(0,188,212,0.12); border-color: var(--blue); color: var(--blue); }
+        .status-now { background: rgba(233,30,99,0.12); border-color: var(--pink); color: var(--pink); animation: pulse 1s ease-in-out infinite; }
+        .status-soon { background: rgba(245,124,0,0.12); border-color: var(--orange); color: var(--orange); }
+        .status-upcoming { background: rgba(245,236,93,0.12); border-color: var(--yellow); color: var(--yellow); }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
         }
 
         .next-train-section {
-            margin-top: 44px;
-            width: 100%;
-            max-width: 380px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 44px; width: 100%; max-width: 380px;
+            border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 26px;
         }
 
         .next-train-label {
             font-size: clamp(0.75rem, 1.1vw, 0.9rem);
-            color: rgba(255, 255, 255, 0.38);
+            color: rgba(255,255,255,0.38);
             text-transform: uppercase;
             letter-spacing: 0.16em;
             font-weight: 600;
@@ -936,8 +697,8 @@
         }
 
         .next-train-info {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
             border-radius: 14px;
             padding: 18px 22px;
             display: flex;
@@ -955,7 +716,7 @@
 
         .next-train-suffix {
             font-size: clamp(0.95rem, 1.9vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.48);
+            color: rgba(255,255,255,0.48);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.11em;
@@ -963,7 +724,7 @@
 
         .destination {
             font-size: clamp(0.75rem, 1.1vw, 0.9rem);
-            color: rgba(255, 255, 255, 0.38);
+            color: rgba(255,255,255,0.38);
             margin-top: 8px;
             text-align: center;
         }
@@ -974,43 +735,28 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: clamp(0.7rem, 0.95vw, 0.8rem);
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(255,255,255,0.35);
             letter-spacing: 0.06em;
-            background: rgba(13, 17, 23, 0.85);
+            background: rgba(13,17,23,0.85);
             backdrop-filter: blur(8px);
             padding: 10px 20px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
-        @media (max-width: 768px) {
-            .footer {
-                left: 18px;
-                transform: none;
-            }
-        }
-
-        .loading-placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
+        @media (max-width: 768px) { .footer { left: 18px; transform: none; } }
 
         .chat-container {
-            position: fixed;
-            right: 0;
-            top: 0;
-            width: 400px;
-            height: 100vh;
+            position: fixed; right: 0; top: 0;
+            width: 400px; height: 100vh;
             background: var(--dark);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            display: none;
-            flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            display: none; flex-direction: column;
             z-index: 1000;
             font-family: 'Raleway', sans-serif;
         }
 
-        .chat-container.active {
-            display: flex;
-        }
+        .chat-container.active { display: flex; }
 
         .chat-header {
             background: var(--yellow);
@@ -1023,66 +769,25 @@
             align-items: center;
         }
 
-        .chat-close {
-            background: none;
-            border: none;
-            color: var(--dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        .chat-close { background: none; border: none; color: var(--dark); font-size: 1.5rem; cursor: pointer; padding: 0; line-height: 1; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
 
         .chat-message {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 12px 15px;
         }
 
-        .chat-message-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-        }
+        .chat-message-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.85rem; }
+        .chat-message-name { font-weight: 700; color: var(--yellow); }
+        .chat-message-time { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+        .chat-message-text { color: rgba(255,255,255,0.9); line-height: 1.5; }
+        .chat-input-form { padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px; }
 
-        .chat-message-name {
-            font-weight: 700;
-            color: var(--yellow);
-        }
-
-        .chat-message-time {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
-        }
-
-        .chat-message-text {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.5;
-        }
-
-        .chat-input-form {
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .chat-input-form input,
-        .chat-input-form textarea {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+        .chat-input-form input, .chat-input-form textarea {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             color: white;
             padding: 10px 12px;
             border-radius: 6px;
@@ -1090,350 +795,117 @@
             font-size: 0.95rem;
         }
 
-        .chat-input-form input::placeholder,
-        .chat-input-form textarea::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .chat-input-form textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
+        .chat-input-form input::placeholder, .chat-input-form textarea::placeholder { color: rgba(255,255,255,0.4); }
+        .chat-input-form textarea { resize: vertical; min-height: 60px; }
 
         .chat-input-form button {
-            background: var(--yellow);
-            border: none;
-            color: var(--dark);
-            padding: 12px;
-            border-radius: 6px;
+            background: var(--yellow); border: none; color: var(--dark);
+            padding: 12px; border-radius: 6px;
             font-family: 'Raleway', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 0.95rem; font-weight: 700;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em;
         }
 
-        .chat-input-form button:hover {
-            background: #FFD93D;
-        }
+        .chat-input-form button:hover { background: #FFD93D; }
 
         .chat-button {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            background: var(--yellow);
-            color: var(--dark);
-            border: none;
-            padding: 15px 25px;
+            position: fixed; bottom: 80px; right: 20px;
+            background: var(--yellow); color: var(--dark);
+            border: none; padding: 15px 25px;
             border-radius: 50px;
             font-family: 'Raleway', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
+            font-size: 0.95rem; font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(245, 236, 93, 0.4);
-            z-index: 999;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            box-shadow: 0 4px 20px rgba(245,236,93,0.4);
+            z-index: 999; text-transform: uppercase; letter-spacing: 0.05em;
             transition: all 0.2s;
         }
 
-        .chat-button:hover {
-            background: #FFD93D;
-            transform: translateY(-2px);
-        }
+        .chat-button:hover { background: #FFD93D; transform: translateY(-2px); }
 
         .chat-notice {
-            position: fixed;
-            bottom: 160px;
-            right: 20px;
-            background: rgba(13, 17, 23, 0.95);
+            position: fixed; bottom: 160px; right: 20px;
+            background: rgba(13,17,23,0.95);
             color: var(--yellow);
             border: 2px solid var(--yellow);
-            padding: 15px 20px;
-            border-radius: 12px;
+            padding: 15px 20px; border-radius: 12px;
             font-family: 'Raleway', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 999;
-            max-width: 300px;
+            font-size: 0.9rem; font-weight: 600;
+            z-index: 999; max-width: 300px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
             display: none;
         }
 
-        .chat-notice.show {
-            display: block;
-            animation: slideUp 0.3s ease-out;
-        }
+        .chat-notice.show { display: block; animation: slideUp 0.3s ease-out; }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        body.simple-mode .chat-button {
-            background: #2d2d2d;
-            color: #ffffff;
-            box-shadow: 0 4px 20px rgba(45, 45, 45, 0.4);
-        }
-
-        body.simple-mode .chat-button:hover {
-            background: #1a1a1a;
-        }
-
-        body.simple-mode .chat-container {
-            background: #ffffff;
-            border-left: 1px solid #e0e0e0;
-        }
-
-        body.simple-mode .chat-header {
-            background: #2d2d2d;
-            color: #ffffff;
-        }
-
-        body.simple-mode .chat-close {
-            color: #ffffff;
-        }
-
-        body.simple-mode .chat-message {
-            background: #f5f5f5;
-            border: 1px solid #e0e0e0;
-        }
-
-        body.simple-mode .chat-message-name {
-            color: #2d2d2d;
-        }
-
-        body.simple-mode .chat-message-time {
-            color: #666666;
-        }
-
-        body.simple-mode .chat-message-text {
-            color: #2d2d2d;
-        }
-
-        body.simple-mode .chat-input-form {
-            border-top: 1px solid #e0e0e0;
-        }
-
-        body.simple-mode .chat-input-form input,
-        body.simple-mode .chat-input-form textarea {
-            background: #ffffff;
-            border: 2px solid #e0e0e0;
-            color: #2d2d2d;
-        }
-
-        body.simple-mode .chat-input-form button {
-            background: #2d2d2d;
-            color: #ffffff;
-        }
-
-        body.simple-mode .chat-input-form button:hover {
-            background: #1a1a1a;
-        }
-
-        body.simple-mode .chat-notice {
-            background: #ffffff;
-            color: #2d2d2d;
-            border-color: #2d2d2d;
-        }
-
-        body.simple-mode[data-theme] .chat-button {
-            background: var(--theme-text);
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .chat-button:hover {
-            opacity: 0.9;
-        }
-
-        body.simple-mode[data-theme] .chat-header {
-            background: var(--theme-text);
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .chat-close {
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .chat-message-name {
-            color: var(--theme-text);
-        }
-
-        body.simple-mode[data-theme] .chat-input-form button {
-            background: var(--theme-text);
-            color: var(--theme-bg);
-        }
-
-        body.simple-mode[data-theme] .chat-notice {
-            background: var(--theme-bg);
-            color: var(--theme-text);
-            border-color: var(--theme-text);
-        }
-
-        body.kindle-mode .chat-button {
-            background: #000000;
-            color: #ffffff;
-            box-shadow: none;
-        }
-
-        body.kindle-mode .chat-container {
-            background: #ffffff;
-            border-left: 2px solid #000000;
-        }
-
-        body.kindle-mode .chat-header {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        body.kindle-mode .chat-close {
-            color: #ffffff;
-        }
-
-        body.kindle-mode .chat-message {
-            background: #f5f5f5;
-            border: 2px solid #000000;
-        }
-
-        body.kindle-mode .chat-message-name {
-            color: #000000;
-        }
-
-        body.kindle-mode .chat-message-time {
-            color: #666666;
-        }
-
-        body.kindle-mode .chat-message-text {
-            color: #000000;
-        }
-
-        body.kindle-mode .chat-input-form {
-            border-top: 2px solid #000000;
-        }
-
-        body.kindle-mode .chat-input-form input,
-        body.kindle-mode .chat-input-form textarea {
-            background: #ffffff;
-            border: 2px solid #000000;
-            color: #000000;
-        }
-
-        body.kindle-mode .chat-input-form button {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        body.kindle-mode .chat-notice {
-            background: #ffffff;
-            color: #000000;
-            border-color: #000000;
-        }
-
-        body.chat-active .container {
-            grid-template-columns: 1fr;
-            margin-right: 400px;
-        }
+        body.simple-mode .chat-button { background: #2d2d2d; color: #ffffff; box-shadow: 0 4px 20px rgba(45,45,45,0.4); }
+        body.simple-mode .chat-button:hover { background: #1a1a1a; }
+        body.simple-mode .chat-container { background: #ffffff; border-left: 1px solid #e0e0e0; }
+        body.simple-mode .chat-header { background: #2d2d2d; color: #ffffff; }
+        body.simple-mode .chat-close { color: #ffffff; }
+        body.simple-mode .chat-message { background: #f5f5f5; border: 1px solid #e0e0e0; }
+        body.simple-mode .chat-message-name { color: #2d2d2d; }
+        body.simple-mode .chat-message-time { color: #666666; }
+        body.simple-mode .chat-message-text { color: #2d2d2d; }
+        body.simple-mode .chat-input-form { border-top: 1px solid #e0e0e0; }
+        body.simple-mode .chat-input-form input, body.simple-mode .chat-input-form textarea { background: #ffffff; border: 2px solid #e0e0e0; color: #2d2d2d; }
+        body.simple-mode .chat-input-form button { background: #2d2d2d; color: #ffffff; }
+        body.simple-mode .chat-input-form button:hover { background: #1a1a1a; }
+        body.simple-mode .chat-notice { background: #ffffff; color: #2d2d2d; border-color: #2d2d2d; }
+        body.simple-mode[data-theme] .chat-button { background: var(--theme-text); color: var(--theme-bg); }
+        body.simple-mode[data-theme] .chat-header { background: var(--theme-text); color: var(--theme-bg); }
+        body.simple-mode[data-theme] .chat-close { color: var(--theme-bg); }
+        body.simple-mode[data-theme] .chat-message-name { color: var(--theme-text); }
+        body.simple-mode[data-theme] .chat-input-form button { background: var(--theme-text); color: var(--theme-bg); }
+        body.simple-mode[data-theme] .chat-notice { background: var(--theme-bg); color: var(--theme-text); border-color: var(--theme-text); }
+        body.kindle-mode .chat-button { background: #000000; color: #ffffff; box-shadow: none; }
+        body.kindle-mode .chat-container { background: #ffffff; border-left: 2px solid #000000; }
+        body.kindle-mode .chat-header { background: #000000; color: #ffffff; }
+        body.kindle-mode .chat-close { color: #ffffff; }
+        body.kindle-mode .chat-message { background: #f5f5f5; border: 2px solid #000000; }
+        body.kindle-mode .chat-message-name { color: #000000; }
+        body.kindle-mode .chat-message-time { color: #666666; }
+        body.kindle-mode .chat-message-text { color: #000000; }
+        body.kindle-mode .chat-input-form { border-top: 2px solid #000000; }
+        body.kindle-mode .chat-input-form input, body.kindle-mode .chat-input-form textarea { background: #ffffff; border: 2px solid #000000; color: #000000; }
+        body.kindle-mode .chat-input-form button { background: #000000; color: #ffffff; }
+        body.kindle-mode .chat-notice { background: #ffffff; color: #000000; border-color: #000000; }
+        body.chat-active .container { grid-template-columns: 1fr; margin-right: 400px; }
 
         @media (max-width: 1024px) {
-            .chat-container {
-                width: 100%;
-                top: auto;
-                bottom: 0;
-                height: 60vh;
-                border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            body.chat-active .container {
-                margin-right: 0;
-                margin-bottom: 60vh;
-            }
-
-            .chat-button {
-                bottom: 20px;
-            }
+            .chat-container { width: 100%; top: auto; bottom: 0; height: 60vh; border-left: none; border-top: 1px solid rgba(255,255,255,0.1); }
+            body.chat-active .container { margin-right: 0; margin-bottom: 60vh; }
+            .chat-button { bottom: 20px; }
         }
 
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-
-            .station-panel {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                min-height: 48vh;
-                padding: 36px 28px 28px;
-            }
-
-            .station-panel:last-child {
-                border-bottom: none;
-            }
-
-            .station-header {
-                margin-bottom: 28px;
-            }
-
-            .main-train {
-                margin-bottom: 22px;
-            }
-
-            .next-train-section {
-                margin-top: 28px;
-            }
-
-            .station-selector {
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .selector-group {
-                width: 100%;
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .selector-group select {
-                width: 100%;
-            }
+            .container { grid-template-columns: 1fr; }
+            .station-panel { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); min-height: 48vh; padding: 36px 28px 28px; }
+            .station-panel:last-child { border-bottom: none; }
+            .station-header { margin-bottom: 28px; }
+            .main-train { margin-bottom: 22px; }
+            .next-train-section { margin-top: 28px; }
+            .station-selector { flex-direction: column; gap: 12px; }
+            .selector-group { width: 100%; flex-direction: column; gap: 6px; }
+            .selector-group select { width: 100%; }
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .station-header {
-            animation-delay: 0.1s;
-        }
-
-        .main-train {
-            animation-delay: 0.18s;
-        }
-
-        .next-train-section {
-            animation-delay: 0.26s;
-        }
+        .station-header { animation-delay: 0.1s; }
+        .main-train { animation-delay: 0.18s; }
+        .next-train-section { animation-delay: 0.26s; }
     </style>
 </head>
 
@@ -1441,10 +913,146 @@
     <div class="header">
         <h1>J-Train</h1>
         <div class="header-controls">
-            <a href="https://transport.vic.gov.au/disruptions/disruptions-information" target="_blank"
-                class="disruptions-link">Disruptions</a>
+            <a href="https://transport.vic.gov.au/disruptions/disruptions-information" target="_blank" class="disruptions-link">Disruptions</a>
             <button class="fullscreen-btn" id="fullscreen-btn">Fullscreen</button>
             <button class="theme-toggle" id="theme-toggle">Simple</button>
+            <div class="more-wrapper" id="more-wrapper">
+                <button class="more-btn" id="more-btn">More</button>
+                <div class="more-dropdown" id="more-dropdown">
+                    <button class="more-dropdown-item" data-modal="share">Share current view</button>
+                    <button class="more-dropdown-item" data-modal="url-params">URL Parameters</button>
+                    <button class="more-dropdown-item" data-modal="how-to-use">How to use URL parameters</button>
+                    <button class="more-dropdown-item" data-modal="firestick">How to set it up on an Amazon Fire Stick</button>
+                    <button class="more-dropdown-item" data-modal="station-ids">Station IDs</button>
+                    <button class="more-dropdown-item" data-modal="hire-me">Hire me</button>
+                    <button class="more-dropdown-item" data-modal="coffee">Buy me a coffee</button>
+                    <div class="more-dropdown-footer">
+                        Developed on Kulin Nations land,<br>
+                        the traditional country of the Wurundjeri people.<br>
+                        We pay our respects to Elders past and present.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-share">
+        <div class="modal">
+            <button class="modal-close" data-close="modal-share">&times;</button>
+            <h2>Share Current View</h2>
+            <p>This URL captures your current stations, station count, theme and colour scheme. Send it to anyone and they'll see exactly what you see.</p>
+            <div class="share-url-box">
+                <input type="text" id="share-url-input" readonly>
+                <button id="copy-share-url">Copy</button>
+            </div>
+            <div class="copy-confirm" id="copy-confirm"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-url-params">
+        <div class="modal">
+            <button class="modal-close" data-close="modal-url-params">&times;</button>
+            <h2>URL Parameters</h2>
+            <p>J-Train can be fully configured via URL parameters. Useful for kiosks, Fire Sticks, or sharing times with friends.</p>
+            <table>
+                <tr><th>Parameter</th><th>Values</th><th>Description</th></tr>
+                <tr><td>count</td><td>1 – 4</td><td>Number of station panels to display</td></tr>
+                <tr><td>stations</td><td>Stop IDs (comma-separated)</td><td>Which stations to show, e.g. <em>1071,1155</em></td></tr>
+                <tr><td>stationNames</td><td>Names (comma-separated)</td><td>Resolve stations by name, e.g. <em>Flinders Street,Parliament</em></td></tr>
+                <tr><td>theme</td><td>simple, kindle</td><td>Which display theme to use</td></tr>
+                <tr><td>color</td><td>lime-forest, yellow-navy…</td><td>Which colour scheme to apply</td></tr>
+                <tr><td>fullscreen</td><td>true / 1</td><td>Launch straight into fullscreen mode</td></tr>
+            </table>
+            <h3>Example</h3>
+            <code>https://jlesdev.github.io/J-Train/?count=2&amp;stationNames=Flinders Street,Parliament&amp;theme=kindle&amp;fullscreen=true</code>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-how-to-use">
+        <div class="modal">
+            <button class="modal-close" data-close="modal-how-to-use">&times;</button>
+            <h2>How to Use URL Parameters</h2>
+            <p>URL parameters let you bookmark or share a specific J-Train configuration without touching any settings.</p>
+            <h3>Step 1 — Start with the base URL</h3>
+            <code>https://jlesdev.github.io/J-Train/</code>
+            <h3>Step 2 — Add a <em>?</em> then your first parameter</h3>
+            <code>https://jlesdev.github.io/J-Train/?theme=kindle</code>
+            <h3>Step 3 — Chain more with <em>&amp;</em></h3>
+            <code>https://jlesdev.github.io/J-Train/?theme=kindle&amp;count=1&amp;stationNames=Richmond&amp;fullscreen=true</code>
+            <h3>Tips</h3>
+            <p>Station names are case-insensitive and partial matches work — <em>flinders</em> will match <em>Flinders Street</em>. Stop IDs are more reliable if you know them.</p>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-firestick">
+        <div class="modal">
+            <button class="modal-close" data-close="modal-firestick">&times;</button>
+            <h2>Amazon Fire Stick Setup</h2>
+            <p>Turn any TV into a live train display using a Fire Stick and the Silk Browser. Works brilliantly in Kindle mode.</p>
+            <div class="firestick-step">
+                <div class="firestick-step-num">1</div>
+                <p>On your Fire Stick, open the <strong>Silk Browser</strong> (install it free from the Appstore if you don't have it).</p>
+            </div>
+            <div class="firestick-step">
+                <div class="firestick-step-num">2</div>
+                <p>Navigate to your J-Train URL. Add <strong>?theme=kindle&amp;fullscreen=true</strong> to the end for a clean, high-contrast display perfect for TVs.</p>
+            </div>
+            <div class="firestick-step">
+                <div class="firestick-step-num">3</div>
+                <p>Use the <strong>stationNames</strong> parameter to pre-load your station so you don't have to configure anything on the TV. Example:</p>
+            </div>
+            <code>?theme=kindle&amp;fullscreen=true&amp;count=1&amp;stationNames=Flinders Street</code>
+            <div class="firestick-step">
+                <div class="firestick-step-num">4</div>
+                <p>Bookmark the URL in Silk. On Fire Stick you can pin the Silk Browser to your home screen — it'll open straight to your train board next time.</p>
+            </div>
+            <div class="firestick-step">
+                <div class="firestick-step-num">5</div>
+                <p>Set your Fire Stick's <strong>Display Sleep</strong> to "Never" (Settings → Display → Display Sleep) so the board stays on all day.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-station-ids">
+        <div class="modal" style="max-width: 640px;">
+            <button class="modal-close" data-close="modal-station-ids">&times;</button>
+            <h2>Station IDs</h2>
+            <p>All Melbourne metropolitan train station stop IDs as used by the PTV API. Filter by name to find what you need.</p>
+            <input type="text" class="station-id-search" id="station-id-search" placeholder="Filter stations…">
+            <div class="station-id-table-wrap">
+                <table class="station-id-table" id="station-id-table">
+                    <thead><tr><th>Stop ID</th><th>Station Name</th><th>Line(s)</th></tr></thead>
+                    <tbody id="station-id-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-hire-me">
+        <div class="modal">
+            <button class="modal-close" data-close="modal-hire-me">&times;</button>
+            <h2>Hire Me</h2>
+            <p>Hi, I'm Jonty. A Melbourne-based Rust developer who also builds web tools like this one.</p>
+            <h3>What I do</h3>
+            <p>Backend systems in Rust, Cloudflare Workers, API integrations, real-time data dashboards, and web applications. I care about performance and quality.</p>
+            <h3>Get in touch</h3>
+            <p>If you've got a project in mind or need help with display visualisation, I'd love to hear about it.</p>
+            <br>
+            <a href="mailto:jontyleslie@gmail.com" class="modal-cta">Email me</a>
+            <a href="https://jlesdev.github.io/SiteWithTimetable/" target="_blank" class="modal-cta secondary">My site</a>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-coffee">
+        <div class="modal" style="text-align: center;">
+            <button class="modal-close" data-close="modal-coffee">&times;</button>
+            <h2>Buy Me a Coffee</h2>
+            <span class="coffee-emoji">☕</span>
+            <p>J-Train is free and always will be. If it's saved you from missing a train (or just made your morning commute a bit less mysterious), consider shouting me a coffee.</p>
+            <br>
+            <p style="color: rgba(255,255,255,0.45); font-size: 0.82rem; margin-top: 10px;">Every coffee keeps the Cloudflare Workers running and the data flowing.</p>
+            <br>
+            <a href="https://buymeacoffee.com" target="_blank" class="modal-cta">Buy me a coffee</a>
         </div>
     </div>
 
@@ -1458,49 +1066,31 @@
                 <option value="4">4</option>
             </select>
         </div>
-        <div class="control-group" id="station-selects-container">
-        </div>
+        <div class="control-group" id="station-selects-container"></div>
         <div class="control-group">
             <label>Theme</label>
             <div class="theme-colors">
-                <div class="theme-color-box" data-theme="default"
-                    style="background: linear-gradient(135deg, #2d2d2d 50%, #ffffff 50%);" title="Default"></div>
-                <div class="theme-color-box" data-theme="cream-teal"
-                    style="background: linear-gradient(135deg, #F0EDCC 50%, #02343F 50%);" title="Cream & Teal"></div>
-                <div class="theme-color-box" data-theme="sage-purple"
-                    style="background: linear-gradient(135deg, #ACC7B4 50%, #331B3F 50%);" title="Sage & Purple"></div>
-                <div class="theme-color-box" data-theme="yellow-navy"
-                    style="background: linear-gradient(135deg, #F5D042 50%, #0A174E 50%);" title="Yellow & Navy"></div>
-                <div class="theme-color-box" data-theme="lime-forest"
-                    style="background: linear-gradient(135deg, #CED46A 50%, #07553B 50%);" title="Lime & Forest"></div>
-                <div class="theme-color-box" data-theme="slate-blue"
-                    style="background: linear-gradient(135deg, #DCE2F0 50%, #50586C 50%);" title="Slate & Blue"></div>
-                <div class="theme-color-box" data-theme="peach-brown"
-                    style="background: linear-gradient(135deg, #F9EBDE 50%, #815854 50%);" title="Peach & Brown"></div>
-                <div class="theme-color-box" data-theme="gold-navy"
-                    style="background: linear-gradient(135deg, #DDA94B 50%, #1E4174 50%);" title="Gold & Navy"></div>
-                <div class="theme-color-box" data-theme="mint-navy"
-                    style="background: linear-gradient(135deg, #ADEFD1 50%, #00203F 50%);" title="Mint & Navy"></div>
-                <div class="theme-color-box" data-theme="yellow-black"
-                    style="background: linear-gradient(135deg, #FEE715 50%, #101820 50%);" title="Yellow & Black"></div>
-                <div class="theme-color-box" data-theme="sky-coral"
-                    style="background: linear-gradient(135deg, #5CC8D7 50%, #B1624E 50%);" title="Sky & Coral"></div>
+                <div class="theme-color-box" data-theme="default"        style="background: linear-gradient(135deg, #2d2d2d 50%, #ffffff 50%);"  title="Default"></div>
+                <div class="theme-color-box" data-theme="cream-teal"     style="background: linear-gradient(135deg, #F0EDCC 50%, #02343F 50%);"  title="Cream & Teal"></div>
+                <div class="theme-color-box" data-theme="sage-purple"    style="background: linear-gradient(135deg, #ACC7B4 50%, #331B3F 50%);"  title="Sage & Purple"></div>
+                <div class="theme-color-box" data-theme="yellow-navy"    style="background: linear-gradient(135deg, #F5D042 50%, #0A174E 50%);"  title="Yellow & Navy"></div>
+                <div class="theme-color-box" data-theme="lime-forest"    style="background: linear-gradient(135deg, #CED46A 50%, #07553B 50%);"  title="Lime & Forest"></div>
+                <div class="theme-color-box" data-theme="slate-blue"     style="background: linear-gradient(135deg, #DCE2F0 50%, #50586C 50%);"  title="Slate & Blue"></div>
+                <div class="theme-color-box" data-theme="peach-brown"    style="background: linear-gradient(135deg, #F9EBDE 50%, #815854 50%);"  title="Peach & Brown"></div>
+                <div class="theme-color-box" data-theme="gold-navy"      style="background: linear-gradient(135deg, #DDA94B 50%, #1E4174 50%);"  title="Gold & Navy"></div>
+                <div class="theme-color-box" data-theme="mint-navy"      style="background: linear-gradient(135deg, #ADEFD1 50%, #00203F 50%);"  title="Mint & Navy"></div>
+                <div class="theme-color-box" data-theme="yellow-black"   style="background: linear-gradient(135deg, #FEE715 50%, #101820 50%);"  title="Yellow & Black"></div>
+                <div class="theme-color-box" data-theme="sky-coral"      style="background: linear-gradient(135deg, #5CC8D7 50%, #B1624E 50%);"  title="Sky & Coral"></div>
             </div>
         </div>
     </div>
 
-    <div class="container cols-2" id="stations-container">
-    </div>
+    <div class="container cols-2" id="stations-container"></div>
 
-    <div class="footer" id="footer">
-        Last updated: --
-    </div>
+    <div class="footer" id="footer">Last updated: --</div>
 
     <button class="chat-button" id="chat-button">Chat</button>
-
-    <div class="chat-notice" id="chat-notice">
-        Set station count to 1 to use chat
-    </div>
+    <div class="chat-notice" id="chat-notice">Set station count to 1 to use chat</div>
 
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
@@ -1508,9 +1098,7 @@
             <button class="chat-close" id="chat-close">&times;</button>
         </div>
         <div class="chat-messages" id="chat-messages">
-            <div style="text-align: center; color: rgba(255, 255, 255, 0.5); padding: 20px;">
-                Select a station to view chat
-            </div>
+            <div style="text-align: center; color: rgba(255,255,255,0.5); padding: 20px;">Select a station to view chat</div>
         </div>
         <form class="chat-input-form" id="chat-form">
             <input type="text" id="chat-name" placeholder="Your name" required maxlength="50">
@@ -1520,6 +1108,212 @@
     </div>
 
     <script>
+        const STATION_DATA = [
+            [1000, "Alamein", "Alamein"],
+            [1001, "Alphington", "Hurstbridge"],
+            [1002, "Altona", "Werribee"],
+            [1003, "Anstey", "Upfield"],
+            [1004, "Armadale", "Glen Waverley, Alamein, Belgrave, Lilydale"],
+            [1005, "Ashburton", "Alamein"],
+            [1006, "Aspendale", "Frankston"],
+            [1007, "Auburn", "Belgrave, Lilydale"],
+            [1008, "Balaclava", "Sandringham"],
+            [1009, "Baldwyn", "Mernda"],
+            [1010, "Belgrave", "Belgrave"],
+            [1011, "Bell", "Upfield"],
+            [1012, "Bentleigh", "Frankston"],
+            [1013, "Berwick", "Pakenham"],
+            [1014, "Bingley", "Mernda"],
+            [1015, "Black Rock", "Sandringham"],
+            [1016, "Blackburn", "Belgrave, Lilydale"],
+            [1017, "Box Hill", "Belgrave, Lilydale"],
+            [1018, "Brighton Beach", "Sandringham"],
+            [1019, "Brighton North", "Sandringham"],
+            [1020, "Broady", "Craigieburn"],
+            [1021, "Brunswick", "Upfield"],
+            [1022, "Burn Street", "Sandringham"],
+            [1023, "Burnley", "Belgrave, Lilydale, Alamein, Glen Waverley"],
+            [1024, "Camberwell", "Belgrave, Lilydale, Alamein"],
+            [1025, "Carnegie", "Frankston"],
+            [1026, "Carrum", "Frankston"],
+            [1027, "Caulfield", "Frankston, Pakenham, Cranbourne"],
+            [1028, "Cheltenham", "Frankston"],
+            [1029, "Clifton Hill", "Hurstbridge, Mernda"],
+            [1030, "Coburg", "Upfield"],
+            [1031, "Collingwood", "Hurstbridge, Mernda"],
+            [1032, "Cragieburn", "Craigieburn"],
+            [1033, "Cranbourne", "Cranbourne"],
+            [1034, "Croydon", "Lilydale"],
+            [1035, "Dandenong", "Pakenham, Cranbourne"],
+            [1036, "Darling", "Glen Waverley"],
+            [1037, "Darebin", "Mernda"],
+            [1038, "Deer Park", "Sunbury, Werribee"],
+            [1039, "Diamond Creek", "Hurstbridge"],
+            [1040, "Diggers Rest", "Sunbury"],
+            [1041, "Doncaster", "Doncaster"],
+            [1042, "East Richmond", "Hurstbridge, Mernda, Belgrave, Lilydale"],
+            [1043, "East Malvern", "Glen Waverley"],
+            [1044, "Eaglemont", "Hurstbridge"],
+            [1045, "Edithvale", "Frankston"],
+            [1046, "Elsternwick", "Sandringham"],
+            [1047, "Eltham", "Hurstbridge"],
+            [1048, "Epping", "Mernda"],
+            [1049, "Essendon", "Craigieburn"],
+            [1050, "Fairfield", "Hurstbridge"],
+            [1051, "Flemington Bridge", "Flemington"],
+            [1052, "Flemington Racecourse", "Flemington"],
+            [1053, "Flinders Lane", "City Loop"],
+            [1054, "Footscray", "Sunbury, Werribee, Williamstown"],
+            [1055, "Frankston", "Frankston"],
+            [1056, "Gardiner", "Glen Waverley"],
+            [1057, "Glenferrie", "Belgrave, Lilydale"],
+            [1058, "Glen Iris", "Alamein"],
+            [1059, "Glen Waverley", "Glen Waverley"],
+            [1060, "Glenhuntly", "Frankston"],
+            [1061, "Glenroy", "Upfield, Craigieburn"],
+            [1062, "Glenwaverley", "Glen Waverley"],
+            [1063, "Greensborough", "Hurstbridge"],
+            [1064, "Hawthorn", "Belgrave, Lilydale"],
+            [1065, "Heidelberg", "Hurstbridge"],
+            [1066, "Heatherdale", "Belgrave, Lilydale"],
+            [1067, "Hurtsbridge", "Hurstbridge"],
+            [1068, "Flagstaff", "City Loop"],
+            [1069, "Frankston", "Frankston"],
+            [1070, "Flinders Street", "All Lines"],
+            [1071, "Flinders Street", "All Lines"],
+            [1072, "Syndal", "Glen Waverley"],
+            [1073, "Hopetoun Park", "Sunbury"],
+            [1074, "Hoppers Crossing", "Werribee"],
+            [1075, "Hurstbridge", "Hurstbridge"],
+            [1076, "Ivanhoe", "Hurstbridge"],
+            [1077, "Jacana", "Craigieburn"],
+            [1078, "Jolimont", "Hurstbridge, Mernda, Belgrave, Lilydale"],
+            [1079, "Kananook", "Frankston"],
+            [1080, "Keilor Plains", "Sunbury"],
+            [1081, "Kensington", "Sunbury, Werribee, Williamstown"],
+            [1082, "Kooyong", "Belgrave, Lilydale, Alamein, Glen Waverley"],
+            [1083, "Lalor", "Mernda"],
+            [1084, "Laburnum", "Belgrave, Lilydale"],
+            [1085, "Laverton", "Werribee, Williamstown"],
+            [1086, "Lilydale", "Lilydale"],
+            [1087, "Lorne Park", "Frankston"],
+            [1088, "Lynbrook", "Cranbourne"],
+            [1089, "Macleod", "Hurstbridge"],
+            [1090, "Malvern", "Glen Waverley, Alamein, Belgrave, Lilydale"],
+            [1091, "McKinnon", "Frankston"],
+            [1092, "Melbourne Airport", "Airport"],
+            [1093, "Melbourne Central", "City Loop"],
+            [1094, "Mentone", "Frankston"],
+            [1095, "Merlynston", "Upfield"],
+            [1096, "Merinda Park", "Cranbourne"],
+            [1097, "Middle Brighton", "Sandringham"],
+            [1098, "Middle Footscray", "Sunbury, Werribee, Williamstown"],
+            [1099, "Mitcham", "Belgrave, Lilydale"],
+            [1100, "Mordialloc", "Frankston"],
+            [1101, "Mornington", "Stony Point"],
+            [1102, "Murrumbeena", "Frankston"],
+            [1103, "Narre Warren", "Pakenham"],
+            [1104, "Newport", "Werribee, Williamstown"],
+            [1105, "Niddrie", "Craigieburn"],
+            [1106, "Noble Park", "Pakenham"],
+            [1107, "Northcote", "Hurstbridge"],
+            [1108, "Nunawading", "Belgrave, Lilydale"],
+            [1109, "Oak Park", "Craigieburn"],
+            [1110, "Officer", "Pakenham"],
+            [1111, "Oakleigh", "Pakenham, Cranbourne"],
+            [1112, "Ormond", "Frankston"],
+            [1113, "Pakenham", "Pakenham"],
+            [1114, "Park Orchards", "Lilydale"],
+            [1115, "Prahran", "Sandringham"],
+            [1116, "Pakenham East", "Pakenham"],
+            [1117, "Princes Park", "Upfield"],
+            [1118, "Reservoir", "Mernda"],
+            [1119, "Ringwood", "Belgrave, Lilydale"],
+            [1120, "Melbourne Central", "City Loop"],
+            [1121, "Ringwood East", "Lilydale"],
+            [1122, "Ripponlea", "Sandringham"],
+            [1123, "Rosanna", "Hurstbridge"],
+            [1124, "Sandringham", "Sandringham"],
+            [1125, "Seaford", "Frankston"],
+            [1126, "Seymour", "Regional"],
+            [1127, "South Geelong", "Regional"],
+            [1128, "South Kensington", "Sunbury, Werribee, Williamstown"],
+            [1129, "South Yarra", "Belgrave, Lilydale, Alamein, Glen Waverley, Frankston"],
+            [1130, "Southern Cross", "City Loop"],
+            [1131, "Springvale", "Pakenham, Cranbourne"],
+            [1132, "St Albans", "Sunbury"],
+            [1133, "St Kilda Road", "Sandringham"],
+            [1134, "Spotswood", "Werribee, Williamstown"],
+            [1135, "Sunshine", "Sunbury, Werribee, Williamstown"],
+            [1136, "Surrey Hills", "Belgrave, Lilydale"],
+            [1137, "Syndal", "Glen Waverley"],
+            [1138, "Tarneit", "Werribee"],
+            [1139, "Tecoma", "Belgrave"],
+            [1140, "Thomastown", "Mernda"],
+            [1141, "Thornbury", "Hurstbridge"],
+            [1142, "Upwey", "Belgrave"],
+            [1143, "Urimbirra", "Stony Point"],
+            [1144, "Wantirna", "Lilydale"],
+            [1145, "Watergardens", "Sunbury"],
+            [1146, "Wendouree", "Regional"],
+            [1147, "West Footscray", "Sunbury, Werribee, Williamstown"],
+            [1148, "Westall", "Pakenham, Cranbourne"],
+            [1149, "Westona", "Werribee, Williamstown"],
+            [1150, "Williamstown", "Williamstown"],
+            [1151, "Williamstown Beach", "Williamstown"],
+            [1152, "Willison", "Alamein"],
+            [1153, "Windsor", "Sandringham"],
+            [1154, "Wyndham Vale", "Werribee"],
+            [1155, "Parliament", "City Loop"],
+            [1156, "Sandown Park", "Cranbourne"],
+            [1157, "Yarraville", "Werribee"],
+            [1158, "Yarraman", "Mernda"],
+            [1159, "Yeringberg", "Lilydale"],
+            [1160, "Nunawading", "Belgrave, Lilydale"],
+            [1161, "Box Hill", "Belgrave, Lilydale"],
+            [1162, "Blackburn", "Belgrave, Lilydale"],
+            [1163, "Mitcham", "Belgrave, Lilydale"],
+            [1164, "Ringwood", "Belgrave, Lilydale"],
+            [1165, "Heathmont", "Belgrave, Lilydale"],
+            [1166, "Ringwood East", "Lilydale"],
+            [1167, "Croydon", "Lilydale"],
+            [1168, "Mooroolbark", "Lilydale"],
+            [1169, "Lilydale", "Lilydale"],
+            [1170, "Boronia", "Belgrave"],
+            [1171, "Ferntree Gully", "Belgrave"],
+            [1172, "Upper Ferntree Gully", "Belgrave"],
+            [1173, "Bayswater", "Belgrave"],
+            [1174, "Wantirna South", "Belgrave"],
+            [1175, "Stud Park", "Pakenham"],
+            [1176, "Hallam", "Pakenham"],
+            [1177, "Beaconsfield", "Pakenham"],
+            [1178, "Cardinia Road", "Pakenham"],
+            [1179, "Cranbourne", "Cranbourne"],
+            [1180, "Lyndhurst", "Cranbourne"],
+            [1181, "Southern Cross", "City Loop"],
+            [1182, "North Melbourne", "Sunbury, Werribee, Williamstown, Upfield, Craigieburn"],
+            [1183, "Moonee Ponds", "Craigieburn"],
+            [1184, "Ascot Vale", "Craigieburn"],
+            [1185, "Newmarket", "Craigieburn"],
+            [1186, "Flemington", "Flemington"],
+            [1187, "Kensington", "Sunbury"],
+            [1188, "Sunbury", "Sunbury"],
+            [1189, "Diggers Rest", "Sunbury"],
+            [1190, "Watergardens", "Sunbury"],
+            [1191, "Keilor Plains", "Sunbury"],
+            [1192, "St Albans", "Sunbury"],
+            [1193, "Ginifer", "Sunbury"],
+            [1194, "Tottenham", "Werribee"],
+            [1195, "Laverton", "Werribee"],
+            [1196, "Aircraft", "Werribee"],
+            [1197, "Williams Landing", "Werribee"],
+            [1198, "Hoppers Crossing", "Werribee"],
+            [1199, "Werribee", "Werribee"],
+            [1200, "Altona", "Werribee"],
+            [1201, "Seaholme", "Werribee"],
+            [1202, "Newport", "Werribee"],
+        ];
+
         const _urlParams = (function() {
             const p = new URLSearchParams(window.location.search);
             return {
@@ -1536,17 +1330,11 @@
         let stationCount = 2;
         let selectedStations = [1028, 1107];
         let currentChatStation = null;
+        let currentColorTheme = 'default';
 
-        const CITY_LOOP_STATIONS = [
-            'Flinders Street',
-            'Southern Cross',
-            'Flagstaff',
-            'Melbourne Central',
-            'Parliament'
-        ];
+        const CITY_LOOP_STATIONS = ['Flinders Street','Southern Cross','Flagstaff','Melbourne Central','Parliament'];
 
         const fullscreenBtn = document.getElementById('fullscreen-btn');
-
         fullscreenBtn.addEventListener('click', () => {
             if (document.body.classList.contains('fullscreen-mode')) {
                 document.body.classList.remove('fullscreen-mode');
@@ -1557,12 +1345,90 @@
             }
         });
 
-        const chatButton = document.getElementById('chat-button');
+        const moreBtn      = document.getElementById('more-btn');
+        const moreDropdown = document.getElementById('more-dropdown');
+        const moreWrapper  = document.getElementById('more-wrapper');
+
+        moreBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            moreDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!moreWrapper.contains(e.target)) moreDropdown.classList.remove('open');
+        });
+
+        document.querySelectorAll('.more-dropdown-item[data-modal]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                moreDropdown.classList.remove('open');
+                const id = 'modal-' + btn.dataset.modal;
+                if (id === 'modal-share') buildShareUrl();
+                if (id === 'modal-station-ids') buildStationIdTable('');
+                document.getElementById(id)?.classList.add('open');
+            });
+        });
+
+        document.querySelectorAll('.modal-close[data-close]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById(btn.dataset.close)?.classList.remove('open');
+            });
+        });
+
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.classList.remove('open');
+            });
+        });
+
+        function buildShareUrl() {
+            const base = 'https://jlesdev.github.io/J-Train/';
+            const params = new URLSearchParams();
+            params.set('count', stationCount);
+            params.set('stations', selectedStations.slice(0, stationCount).join(','));
+            const theme = document.body.classList.contains('kindle-mode') ? 'kindle' : 'simple';
+            params.set('theme', theme);
+            if (currentColorTheme && currentColorTheme !== 'default') {
+                params.set('color', currentColorTheme);
+            }
+            const url = base + '?' + params.toString();
+            document.getElementById('share-url-input').value = url;
+            document.getElementById('copy-confirm').textContent = '';
+        }
+
+        document.getElementById('copy-share-url').addEventListener('click', () => {
+            const input = document.getElementById('share-url-input');
+            input.select();
+            navigator.clipboard.writeText(input.value).then(() => {
+                const confirm = document.getElementById('copy-confirm');
+                confirm.textContent = '✓ Copied to clipboard!';
+                setTimeout(() => { confirm.textContent = ''; }, 2500);
+            }).catch(() => {
+                document.execCommand('copy');
+                document.getElementById('copy-confirm').textContent = '✓ Copied!';
+            });
+        });
+
+        function buildStationIdTable(filter) {
+            const tbody = document.getElementById('station-id-tbody');
+            const q = filter.toLowerCase();
+            const rows = STATION_DATA
+                .filter(([id, name, lines]) => !q || name.toLowerCase().includes(q) || String(id).includes(q) || lines.toLowerCase().includes(q))
+                .sort((a, b) => a[1].localeCompare(b[1]));
+            tbody.innerHTML = rows.map(([id, name, lines]) =>
+                `<tr><td>${id}</td><td>${name}</td><td style="color:rgba(255,255,255,0.5);font-size:0.78rem;">${lines}</td></tr>`
+            ).join('');
+        }
+
+        document.getElementById('station-id-search').addEventListener('input', (e) => {
+            buildStationIdTable(e.target.value);
+        });
+
+        const chatButton    = document.getElementById('chat-button');
         const chatContainer = document.getElementById('chat-container');
-        const chatClose = document.getElementById('chat-close');
-        const chatForm = document.getElementById('chat-form');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatNotice = document.getElementById('chat-notice');
+        const chatClose     = document.getElementById('chat-close');
+        const chatForm      = document.getElementById('chat-form');
+        const chatMessages  = document.getElementById('chat-messages');
+        const chatNotice    = document.getElementById('chat-notice');
 
         chatButton.addEventListener('click', () => {
             if (stationCount === 1 && selectedStations.length > 0) {
@@ -1570,9 +1436,7 @@
                 openChat();
             } else if (stationCount > 1) {
                 chatNotice.classList.add('show');
-                setTimeout(() => {
-                    chatNotice.classList.remove('show');
-                }, 3000);
+                setTimeout(() => chatNotice.classList.remove('show'), 3000);
             }
         });
 
@@ -1584,53 +1448,39 @@
         function openChat() {
             chatContainer.classList.add('active');
             document.body.classList.add('chat-active');
-
             const station = allStations.find(s => s.stop_id === currentChatStation);
-            const stationName = station ? station.stop_name.replace(' Railway Station', '').replace(' Station', '') : 'Station';
+            const stationName = station ? station.stop_name.replace(' Railway Station','').replace(' Station','') : 'Station';
             document.getElementById('chat-station-name').textContent = `${stationName} Chat`;
-
             loadMessages();
         }
 
         async function loadMessages() {
             if (!currentChatStation) return;
-
             try {
                 const response = await fetch(`https://ptv.jontyleslie.workers.dev/chat?station=${currentChatStation}`);
                 const data = await response.json();
-
                 if (data.messages && data.messages.length > 0) {
                     renderMessages(data.messages);
                 } else {
-                    chatMessages.innerHTML = '<div style="text-align: center; color: rgba(255, 255, 255, 0.5); padding: 20px;">No messages yet. Be the first!</div>';
+                    chatMessages.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.5);padding:20px;">No messages yet. Be the first!</div>';
                 }
             } catch (error) {
-                console.error('Error loading messages:', error);
-                chatMessages.innerHTML = '<div style="text-align: center; color: rgba(255, 0, 0, 0.7); padding: 20px;">Error loading messages</div>';
+                chatMessages.innerHTML = '<div style="text-align:center;color:rgba(255,0,0,0.7);padding:20px;">Error loading messages</div>';
             }
         }
 
         function renderMessages(messages) {
             chatMessages.innerHTML = messages.map(msg => {
                 const date = new Date(msg.timestamp);
-                const timeStr = date.toLocaleString('en-AU', {
-                    weekday: 'short',
-                    hour: 'numeric',
-                    minute: '2-digit',
-                    hour12: true
-                });
-
-                return `
-                    <div class="chat-message">
-                        <div class="chat-message-header">
-                            <span class="chat-message-name">${escapeHtml(msg.name)}</span>
-                            <span class="chat-message-time">${timeStr}</span>
-                        </div>
-                        <div class="chat-message-text">${escapeHtml(msg.message)}</div>
+                const timeStr = date.toLocaleString('en-AU', { weekday:'short', hour:'numeric', minute:'2-digit', hour12:true });
+                return `<div class="chat-message">
+                    <div class="chat-message-header">
+                        <span class="chat-message-name">${escapeHtml(msg.name)}</span>
+                        <span class="chat-message-time">${timeStr}</span>
                     </div>
-                `;
+                    <div class="chat-message-text">${escapeHtml(msg.message)}</div>
+                </div>`;
             }).join('');
-
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
@@ -1642,40 +1492,27 @@
 
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const name = document.getElementById('chat-name').value.trim();
+            const name    = document.getElementById('chat-name').value.trim();
             const message = document.getElementById('chat-message').value.trim();
-
             if (!name || !message || !currentChatStation) return;
-
             try {
                 const response = await fetch('https://ptv.jontyleslie.workers.dev/chat', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        station: currentChatStation,
-                        name: name,
-                        message: message
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ station: currentChatStation, name, message })
                 });
-
                 if (response.ok) {
                     document.getElementById('chat-message').value = '';
                     loadMessages();
-                } else {
-                    alert('Failed to send message');
-                }
-            } catch (error) {
-                console.error('Error sending message:', error);
-                alert('Error sending message');
-            }
+                } else { alert('Failed to send message'); }
+            } catch (error) { alert('Error sending message'); }
         });
 
-        const themeToggle = document.getElementById('theme-toggle');
-        const savedTheme = localStorage.getItem('trainTheme');
+        const themeToggle     = document.getElementById('theme-toggle');
+        const savedTheme      = localStorage.getItem('trainTheme');
         const savedColorTheme = localStorage.getItem('colorTheme');
+
+        currentColorTheme = savedColorTheme || 'default';
 
         if (savedTheme === 'simple') {
             document.body.classList.add('simple-mode');
@@ -1694,23 +1531,16 @@
 
         if (_urlParams.theme) {
             const t = _urlParams.theme.toLowerCase();
-            document.body.classList.remove('simple-mode', 'kindle-mode');
-            if (t === 'simple') {
-                document.body.classList.add('simple-mode');
-                themeToggle.textContent = 'Kindle';
-            } else if (t === 'kindle') {
-                document.body.classList.add('kindle-mode');
-                themeToggle.textContent = 'Simple';
-            }
+            document.body.classList.remove('simple-mode','kindle-mode');
+            if (t === 'simple') { document.body.classList.add('simple-mode'); themeToggle.textContent = 'Kindle'; }
+            else if (t === 'kindle') { document.body.classList.add('kindle-mode'); themeToggle.textContent = 'Simple'; }
         }
 
         if (_urlParams.color) {
             const c = _urlParams.color.toLowerCase();
-            if (c === 'default') {
-                document.body.removeAttribute('data-theme');
-            } else {
-                document.body.setAttribute('data-theme', c);
-            }
+            currentColorTheme = c;
+            if (c === 'default') document.body.removeAttribute('data-theme');
+            else document.body.setAttribute('data-theme', c);
         }
 
         if (_urlParams.fullscreen === 'true' || _urlParams.fullscreen === '1') {
@@ -1720,20 +1550,13 @@
 
         if (_urlParams.count) {
             const urlCount = Math.min(4, Math.max(1, parseInt(_urlParams.count)));
-            if (!isNaN(urlCount)) {
-                stationCount = urlCount;
-                document.getElementById('station-count').value = urlCount;
-            }
+            if (!isNaN(urlCount)) { stationCount = urlCount; document.getElementById('station-count').value = urlCount; }
         }
 
         if (_urlParams.stations) {
-            const ids = _urlParams.stations.split(',')
-                .map(s => parseInt(s.trim()))
-                .filter(n => !isNaN(n));
+            const ids = _urlParams.stations.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
             if (ids.length > 0) {
-                selectedStations = Array.from({ length: stationCount }, (_, i) =>
-                    ids[i] !== undefined ? ids[i] : ids[ids.length - 1]
-                );
+                selectedStations = Array.from({ length: stationCount }, (_, i) => ids[i] !== undefined ? ids[i] : ids[ids.length - 1]);
             }
         }
 
@@ -1756,52 +1579,41 @@
         document.querySelectorAll('.theme-color-box').forEach(box => {
             const theme = box.dataset.theme;
             const activeTheme = _urlParams.color || savedColorTheme || 'default';
-            if (theme === activeTheme || (!activeTheme && theme === 'default')) {
-                box.classList.add('active');
-            }
+            if (theme === activeTheme || (!activeTheme && theme === 'default')) box.classList.add('active');
 
             box.addEventListener('click', () => {
                 document.querySelectorAll('.theme-color-box').forEach(b => b.classList.remove('active'));
                 box.classList.add('active');
-
-                if (theme === 'default') {
-                    document.body.removeAttribute('data-theme');
-                    localStorage.setItem('colorTheme', 'default');
-                } else {
-                    document.body.setAttribute('data-theme', theme);
-                    localStorage.setItem('colorTheme', theme);
-                }
+                currentColorTheme = theme;
+                if (theme === 'default') { document.body.removeAttribute('data-theme'); localStorage.setItem('colorTheme','default'); }
+                else { document.body.setAttribute('data-theme', theme); localStorage.setItem('colorTheme', theme); }
             });
         });
 
         function createStationPanel(index) {
-            return `
-                <div class="station-panel" data-index="${index}">
-                    <div class="station-header fade-in">
-                        <h2 class="station-name" id="station-name-${index}">Select Station</h2>
-                        <div class="station-line"></div>
-                        <div class="direction-label">City Loop</div>
-                    </div>
-
-                    <div class="main-train fade-in">
-                        <div class="main-time" id="time-${index}">--</div>
-                        <div class="main-label">Minutes</div>
-                        <div class="status-badge status-loading" id="status-${index}">Select Station</div>
-                        <div class="destination" id="destination-${index}"></div>
-                    </div>
-
-                    <div class="next-train-section fade-in">
-                        <div class="next-train-label">Then</div>
-                        <div class="next-train-info">
-                            <div>
-                                <span class="next-train-time" id="next-time-${index}">--</span>
-                                <span class="next-train-suffix">min</span>
-                            </div>
-                        </div>
-                        <div class="destination" id="next-destination-${index}"></div>
-                    </div>
+            return `<div class="station-panel" data-index="${index}">
+                <div class="station-header fade-in">
+                    <h2 class="station-name" id="station-name-${index}">Select Station</h2>
+                    <div class="station-line"></div>
+                    <div class="direction-label">City Loop</div>
                 </div>
-            `;
+                <div class="main-train fade-in">
+                    <div class="main-time" id="time-${index}">--</div>
+                    <div class="main-label">Minutes</div>
+                    <div class="status-badge status-loading" id="status-${index}">Select Station</div>
+                    <div class="destination" id="destination-${index}"></div>
+                </div>
+                <div class="next-train-section fade-in">
+                    <div class="next-train-label">Then</div>
+                    <div class="next-train-info">
+                        <div>
+                            <span class="next-train-time" id="next-time-${index}">--</span>
+                            <span class="next-train-suffix">min</span>
+                        </div>
+                    </div>
+                    <div class="destination" id="next-destination-${index}"></div>
+                </div>
+            </div>`;
         }
 
         function updateStationCount(count) {
@@ -1809,18 +1621,13 @@
             const container = document.getElementById('stations-container');
             container.className = `container cols-${count}`;
             container.innerHTML = '';
-
             for (let i = 0; i < count; i++) {
                 container.innerHTML += createStationPanel(i);
-                if (!selectedStations[i]) {
-                    selectedStations[i] = 1071;
-                }
+                if (!selectedStations[i]) selectedStations[i] = 1071;
             }
-
             selectedStations = selectedStations.slice(0, count);
             createStationSelectors();
             updateAllTrains();
-
             if (count === 1 && selectedStations.length > 0) {
                 currentChatStation = selectedStations[0];
             } else {
@@ -1833,39 +1640,26 @@
         function createStationSelectors() {
             const selectsContainer = document.getElementById('station-selects-container');
             selectsContainer.innerHTML = '';
-
             for (let i = 0; i < stationCount; i++) {
                 const selectWrapper = document.createElement('div');
-                selectWrapper.style.display = 'flex';
-                selectWrapper.style.alignItems = 'center';
-                selectWrapper.style.gap = '10px';
-
+                selectWrapper.style.cssText = 'display:flex;align-items:center;gap:10px;';
                 const label = document.createElement('label');
                 label.textContent = `${i + 1}`;
                 label.style.minWidth = '15px';
-
                 const select = document.createElement('select');
                 select.id = `station-select-${i}`;
                 select.className = 'station-select';
-
-                const options = allStations.map(station =>
-                    `<option value="${station.stop_id}">${station.stop_name.replace(' Railway Station', '').replace(' Station', '')}</option>`
-                ).join('');
-
-                select.innerHTML = options;
+                select.innerHTML = allStations.map(s => `<option value="${s.stop_id}">${s.stop_name.replace(' Railway Station','').replace(' Station','')}</option>`).join('');
                 select.value = selectedStations[i];
-
                 select.addEventListener('change', (e) => {
                     selectedStations[i] = parseInt(e.target.value);
                     const station = allStations.find(s => s.stop_id === selectedStations[i]);
                     updateStationName(i, station?.stop_name);
                     updateAllTrains();
                 });
-
                 selectWrapper.appendChild(label);
                 selectWrapper.appendChild(select);
                 selectsContainer.appendChild(selectWrapper);
-
                 const station = allStations.find(s => s.stop_id === selectedStations[i]);
                 updateStationName(i, station?.stop_name);
             }
@@ -1873,61 +1667,42 @@
 
         document.getElementById('station-count').addEventListener('change', (e) => {
             const count = parseInt(e.target.value);
-            if (count >= 1 && count <= 4) {
-                updateStationCount(count);
-            }
+            if (count >= 1 && count <= 4) updateStationCount(count);
         });
 
         async function loadStationsList() {
             try {
                 const response = await fetch('https://ptv.jontyleslie.workers.dev/stations');
                 const data = await response.json();
-
                 if (data.stations && Array.isArray(data.stations)) {
-                    allStations = data.stations.sort((a, b) =>
-                        a.stop_name.localeCompare(b.stop_name)
-                    );
+                    allStations = data.stations.sort((a, b) => a.stop_name.localeCompare(b.stop_name));
 
                     if (_urlParams.stationNames) {
                         const names = _urlParams.stationNames.split(',').map(s => s.trim().toLowerCase());
                         const resolvedIds = names.map(name => {
                             const match = allStations.find(s => {
-                                const clean = s.stop_name.toLowerCase()
-                                    .replace(' railway station', '')
-                                    .replace(' station', '');
+                                const clean = s.stop_name.toLowerCase().replace(' railway station','').replace(' station','');
                                 return clean === name || clean.includes(name) || s.stop_name.toLowerCase().includes(name);
                             });
                             return match ? match.stop_id : null;
                         }).filter(id => id !== null);
-
                         if (resolvedIds.length > 0) {
-                            selectedStations = Array.from({ length: stationCount }, (_, i) =>
-                                resolvedIds[i] !== undefined ? resolvedIds[i] : resolvedIds[resolvedIds.length - 1]
-                            );
+                            selectedStations = Array.from({ length: stationCount }, (_, i) => resolvedIds[i] !== undefined ? resolvedIds[i] : resolvedIds[resolvedIds.length - 1]);
                         }
                     }
-
                     updateStationCount(stationCount);
                 }
-            } catch (error) {
-                console.error('Error loading stations:', error);
-            }
+            } catch (error) { console.error('Error loading stations:', error); }
         }
 
         function updateStationName(index, fullName) {
             if (!fullName) return;
-            const cleanName = fullName
-                .replace(' Railway Station', '')
-                .replace(' Station', '');
-            const nameEl = document.getElementById(`station-name-${index}`);
-            if (nameEl) {
-                nameEl.textContent = cleanName;
-            }
+            const el = document.getElementById(`station-name-${index}`);
+            if (el) el.textContent = fullName.replace(' Railway Station','').replace(' Station','');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             loadStationsList();
-
             if (document.body.classList.contains('kindle-mode')) {
                 document.querySelector('.station-selector').style.display = 'none';
             }
@@ -1937,16 +1712,11 @@
             try {
                 const response = await fetch(`https://ptv.jontyleslie.workers.dev/?stop=${stationId}`);
                 const data = await response.json();
-
-                if (!data.departures || data.departures.length === 0) {
-                    return [];
-                }
+                if (!data.departures || data.departures.length === 0) return [];
 
                 const cityBoundTrains = data.departures.filter(dep => {
                     const direction = data.directions?.[dep.direction_id]?.direction_name || '';
-                    const isToCity = dep.direction_id === 1 ||
-                        CITY_LOOP_STATIONS.some(station => direction.includes(station));
-                    return isToCity;
+                    return dep.direction_id === 1 || CITY_LOOP_STATIONS.some(s => direction.includes(s));
                 });
 
                 const trainsToUse = cityBoundTrains.length > 0 ? cityBoundTrains : data.departures;
@@ -1954,120 +1724,67 @@
                 return trainsToUse.slice(0, 2).map(train => {
                     const time = train.estimated_departure_utc || train.scheduled_departure_utc;
                     if (!time) return null;
-
-                    const diff = new Date(time).getTime() - Date.now();
+                    const diff    = new Date(time).getTime() - Date.now();
                     const minutes = Math.max(0, Math.ceil(diff / 60000));
-
                     const direction = data.directions?.[train.direction_id]?.direction_name || '';
-
-                    return {
-                        minutes,
-                        destination: direction,
-                        routeId: train.route_id
-                    };
+                    return { minutes, destination: direction, routeId: train.route_id };
                 }).filter(t => t !== null);
-
-            } catch (error) {
-                console.error('Error fetching train data:', error);
-                return [];
-            }
+            } catch (error) { return []; }
         }
 
-        function getStatusClass(minutes) {
-            if (minutes === 0) return 'status-now';
-            if (minutes <= 3) return 'status-soon';
-            return 'status-upcoming';
-        }
-
-        function getStatusText(minutes) {
-            if (minutes === 0) return 'Now';
-            if (minutes <= 3) return 'Arriving';
-            return 'On Time';
-        }
+        function getStatusClass(m) { return m === 0 ? 'status-now' : m <= 3 ? 'status-soon' : 'status-upcoming'; }
+        function getStatusText(m)  { return m === 0 ? 'Now'        : m <= 3 ? 'Arriving'    : 'On Time'; }
 
         function updateDisplay(index, trains) {
-            const timeEl = document.getElementById(`time-${index}`);
-            const statusEl = document.getElementById(`status-${index}`);
-            const destinationEl = document.getElementById(`destination-${index}`);
+            const timeEl     = document.getElementById(`time-${index}`);
+            const statusEl   = document.getElementById(`status-${index}`);
+            const destEl     = document.getElementById(`destination-${index}`);
             const nextTimeEl = document.getElementById(`next-time-${index}`);
-            const nextDestinationEl = document.getElementById(`next-destination-${index}`);
-
+            const nextDestEl = document.getElementById(`next-destination-${index}`);
             if (!timeEl) return;
 
             if (!trains || trains.length === 0) {
-                if (timeEl.textContent !== '--') timeEl.textContent = '--';
-                if (statusEl.textContent !== 'No Data') statusEl.textContent = 'No Data';
-                if (statusEl.className !== 'status-badge status-loading') statusEl.className = 'status-badge status-loading';
-                if (destinationEl.textContent !== '') destinationEl.textContent = '';
-                if (nextTimeEl.textContent !== '--') nextTimeEl.textContent = '--';
-                if (nextDestinationEl.textContent !== '') nextDestinationEl.textContent = '';
+                timeEl.textContent      = '--';
+                statusEl.textContent    = 'No Data';
+                statusEl.className      = 'status-badge status-loading';
+                destEl.textContent      = '';
+                nextTimeEl.textContent  = '--';
+                nextDestEl.textContent  = '';
                 return;
             }
 
-            const firstTrain = trains[0];
-            if (timeEl.textContent !== String(firstTrain.minutes)) {
-                timeEl.textContent = firstTrain.minutes;
-            }
-            if (destinationEl.textContent !== firstTrain.destination) {
-                destinationEl.textContent = firstTrain.destination;
-            }
-
-            const statusText = getStatusText(firstTrain.minutes);
-            const statusClass = `status-badge ${getStatusClass(firstTrain.minutes)}`;
-            if (statusEl.textContent !== statusText) statusEl.textContent = statusText;
-            if (statusEl.className !== statusClass) statusEl.className = statusClass;
+            const first = trains[0];
+            timeEl.textContent   = first.minutes;
+            destEl.textContent   = first.destination;
+            statusEl.textContent = getStatusText(first.minutes);
+            statusEl.className   = `status-badge ${getStatusClass(first.minutes)}`;
 
             if (trains.length > 1) {
-                const secondTrain = trains[1];
-                if (nextTimeEl.textContent !== String(secondTrain.minutes)) {
-                    nextTimeEl.textContent = secondTrain.minutes;
-                }
-                if (nextDestinationEl.textContent !== secondTrain.destination) {
-                    nextDestinationEl.textContent = secondTrain.destination;
-                }
+                nextTimeEl.textContent = trains[1].minutes;
+                nextDestEl.textContent = trains[1].destination;
             } else {
-                if (nextTimeEl.textContent !== '--') nextTimeEl.textContent = '--';
-                if (nextDestinationEl.textContent !== '') nextDestinationEl.textContent = '';
+                nextTimeEl.textContent = '--';
+                nextDestEl.textContent = '';
             }
         }
 
         async function updateAllTrains() {
-            const promises = selectedStations.map(stationId => fetchTrains(stationId));
-            const results = await Promise.all(promises);
-
-            results.forEach((trains, index) => {
-                updateDisplay(index, trains);
-            });
-
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('en-AU', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
+            const results = await Promise.all(selectedStations.map(id => fetchTrains(id)));
+            results.forEach((trains, i) => updateDisplay(i, trains));
             const footerEl = document.getElementById('footer');
             if (footerEl) {
-                footerEl.textContent = `Last updated: ${timeString}`;
+                footerEl.textContent = `Last updated: ${new Date().toLocaleTimeString('en-AU', { hour:'2-digit', minute:'2-digit', second:'2-digit' })}`;
             }
         }
 
         let updateInterval;
-
         function startUpdates() {
             updateAllTrains();
-
-            if (updateInterval) {
-                clearInterval(updateInterval);
-            }
-
-            const isKindle = document.body.classList.contains('kindle-mode');
-            const interval = isKindle ? 60000 : 30000;
-
-            updateInterval = setInterval(updateAllTrains, interval);
+            if (updateInterval) clearInterval(updateInterval);
+            updateInterval = setInterval(updateAllTrains, document.body.classList.contains('kindle-mode') ? 60000 : 30000);
         }
 
         startUpdates();
     </script>
 </body>
-
 </html>
